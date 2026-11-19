@@ -10,6 +10,7 @@
 let currentCategory = 'all';
 let currentGrantCategory = 'all';
 let searchQuery = '';
+let grantSearchQuery = '';
 let activeService = null;
 let activeModalTab = 'workflow';
 let chatHistory = [];
@@ -54,6 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderInternalGrants();
   renderStaff();
   initSearch();
+  initGrantSearch();
   initModalEvents();
   initChatEvents();
   initContactForm();
@@ -275,8 +277,21 @@ function updateLanguageUI() {
   const gdriveHubDesc = document.getElementById('gdriveHubDesc');
   if (gdriveHubDesc) gdriveHubDesc.textContent = dict.gdrive_hub_desc || 'เข้าถึงเอกสาร ประกาศ และแบบฟอร์มขอรับทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่ทั้งหมดได้โดยตรงบน Google Drive พร้อมดาวน์โหลด';
 
-  const navGrantsLink = document.querySelector('.header-nav-link.highlight-nav-link');
-  if (navGrantsLink) navGrantsLink.textContent = dict.nav_internal_grants || 'ทุนวิจัยภายใน มช.';
+  const navHome = document.getElementById('navHome');
+  if (navHome) navHome.textContent = dict.nav_home || 'หน้าแรก';
+  const navProcesses = document.getElementById('navProcesses');
+  if (navProcesses) navProcesses.textContent = dict.nav_processes || 'กระบวนการขั้นตอน การดำเนินโครงการวิจัย';
+  const navGrants = document.getElementById('navGrants');
+  if (navGrants) navGrants.textContent = dict.nav_internal_grants || 'ทุนวิจัยภายใน มช.';
+  const navRelated = document.getElementById('navRelated');
+  if (navRelated) navRelated.textContent = dict.nav_related_systems || 'ระบบที่เกี่ยวข้อง';
+  const navContact = document.getElementById('navContact');
+  if (navContact) navContact.textContent = dict.nav_contact || 'ติดต่อเจ้าหน้าที่';
+
+  const grantSearchInput = document.getElementById('grantSearchInput');
+  if (grantSearchInput) grantSearchInput.placeholder = currentLang === 'en' ? 'Search internal grants, announcements, forms, or keywords...' : 'ค้นหาตามชื่อทุนวิจัย ประกาศ แบบฟอร์ม หรือคำสำคัญ...';
+  const clearGrantSearchBtn = document.getElementById('clearGrantSearchBtn');
+  if (clearGrantSearchBtn) clearGrantSearchBtn.title = dict.clear_search || 'ล้างคำค้นหา';
 
   renderCategories();
   renderServices();
@@ -385,17 +400,24 @@ function renderServices() {
   const activeData = getActiveData();
   const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.th;
 
-  // กรองตามหมวดหมู่และคำค้นหา
-  const filteredServices = activeData.services.filter(service => {
-    const matchesCategory = currentCategory === 'all' || service.category === currentCategory;
+  // กรองตามหมวดหมู่และคำค้นหาแบบปลอดภัย
+  const query = (typeof searchQuery === 'string' ? searchQuery : '').toLowerCase().trim();
 
-    const query = searchQuery.toLowerCase().trim();
+  const filteredServices = activeData.services.filter(service => {
+    const matchesCategory = (query.length > 0)
+      ? true 
+      : (currentCategory === 'all' || service.category === currentCategory);
+
     const matchesSearch = query === '' ||
-      service.title.toLowerCase().includes(query) ||
-      service.summary.toLowerCase().includes(query) ||
-      service.objective.toLowerCase().includes(query) ||
-      service.tips.toLowerCase().includes(query) ||
-      (service.documents && service.documents.some(d => d.name.toLowerCase().includes(query)));
+      (service.title && service.title.toLowerCase().includes(query)) ||
+      (service.shortTitle && service.shortTitle.toLowerCase().includes(query)) ||
+      (service.summary && service.summary.toLowerCase().includes(query)) ||
+      (service.objective && service.objective.toLowerCase().includes(query)) ||
+      (service.tips && service.tips.toLowerCase().includes(query)) ||
+      (service.number && String(service.number).includes(query)) ||
+      (service.documents && Array.isArray(service.documents) && service.documents.some(d => d.name && d.name.toLowerCase().includes(query))) ||
+      (service.researcherSteps && Array.isArray(service.researcherSteps) && service.researcherSteps.some(s => s.desc && s.desc.toLowerCase().includes(query))) ||
+      (service.staffSteps && Array.isArray(service.staffSteps) && service.staffSteps.some(s => s.desc && s.desc.toLowerCase().includes(query)));
 
     return matchesCategory && matchesSearch;
   });
@@ -477,6 +499,12 @@ function initSearch() {
 
       if (searchQuery.trim().length > 0) {
         if (clearSearchBtn) clearSearchBtn.style.display = 'flex';
+        if (currentCategory !== 'all') {
+          currentCategory = 'all';
+          document.querySelectorAll('#categoryTabs .tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-cat') === 'all');
+          });
+        }
       } else {
         if (clearSearchBtn) clearSearchBtn.style.display = 'none';
       }
@@ -518,6 +546,12 @@ function initSearch() {
         searchInput.value = term;
         searchQuery = term;
         if (clearSearchBtn) clearSearchBtn.style.display = 'flex';
+        if (currentCategory !== 'all') {
+          currentCategory = 'all';
+          document.querySelectorAll('#categoryTabs .tab-btn').forEach(b => {
+            b.classList.toggle('active', b.getAttribute('data-cat') === 'all');
+          });
+        }
         renderServices();
         const servicesSection = document.getElementById('servicesGrid');
         if (servicesSection) {
@@ -577,8 +611,22 @@ function renderInternalGrants() {
   if (!data || !data.grants) return;
 
   const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.th;
+  const query = (typeof grantSearchQuery === 'string' ? grantSearchQuery : '').toLowerCase().trim();
+
   const filteredGrants = data.grants.filter(grant => {
-    return currentGrantCategory === 'all' || grant.category === currentGrantCategory;
+    const matchesCategory = (query.length > 0)
+      ? true
+      : (currentGrantCategory === 'all' || grant.category === currentGrantCategory);
+
+    const matchesSearch = query === '' ||
+      (grant.title && grant.title.toLowerCase().includes(query)) ||
+      (grant.summary && grant.summary.toLowerCase().includes(query)) ||
+      (grant.number && String(grant.number).includes(query)) ||
+      (grant.announcements && Array.isArray(grant.announcements) && grant.announcements.some(a => a.title && a.title.toLowerCase().includes(query))) ||
+      (grant.forms && Array.isArray(grant.forms) && grant.forms.some(f => f.title && f.title.toLowerCase().includes(query))) ||
+      (grant.steps && Array.isArray(grant.steps) && grant.steps.some(s => s.desc && s.desc.toLowerCase().includes(query)));
+
+    return matchesCategory && matchesSearch;
   });
 
   if (filteredGrants.length === 0) {
@@ -586,7 +634,7 @@ function renderInternalGrants() {
       <div class="empty-results glass-panel">
         <span class="material-icons">search_off</span>
         <h4>${dict.empty_results_title || 'ไม่พบรายการทุน'}</h4>
-        <p>${dict.empty_results_desc || 'กรุณาเลือกหมวดหมู่อื่น'}</p>
+        <p>${dict.empty_results_desc || 'กรุณาลองค้นหาด้วยคำอื่น หรือเลือกหมวดหมู่อื่น'}</p>
       </div>
     `;
     return;
@@ -718,7 +766,83 @@ function renderInternalGrants() {
 }
 
 /* ==========================================================================
-   4.2 NAVIGATION, TOAST & SMOOTH SCROLL MECHANICS
+   4.2 GRANT SEARCH HUB LOGIC (grants.html)
+   ========================================================================== */
+function initGrantSearch() {
+  const grantSearchInput = document.getElementById('grantSearchInput');
+  const clearGrantSearchBtn = document.getElementById('clearGrantSearchBtn');
+
+  if (grantSearchInput) {
+    grantSearchInput.addEventListener('input', (e) => {
+      grantSearchQuery = e.target.value;
+
+      if (grantSearchQuery.trim().length > 0) {
+        if (clearGrantSearchBtn) clearGrantSearchBtn.style.display = 'flex';
+        if (currentGrantCategory !== 'all') {
+          currentGrantCategory = 'all';
+          document.querySelectorAll('.grants-category-tabs .tab-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.id === 'grant-tab-all');
+          });
+        }
+      } else {
+        if (clearGrantSearchBtn) clearGrantSearchBtn.style.display = 'none';
+      }
+
+      renderInternalGrants();
+    });
+
+    if (clearGrantSearchBtn) {
+      clearGrantSearchBtn.addEventListener('click', () => {
+        grantSearchInput.value = '';
+        grantSearchQuery = '';
+        clearGrantSearchBtn.style.display = 'none';
+        grantSearchInput.focus();
+        renderInternalGrants();
+      });
+    }
+
+    // Keyboard shortcut "/" for grant search
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== grantSearchInput && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        grantSearchInput.focus();
+        grantSearchInput.select();
+      } else if (e.key === 'Escape' && document.activeElement === grantSearchInput) {
+        grantSearchInput.value = '';
+        grantSearchQuery = '';
+        if (clearGrantSearchBtn) clearGrantSearchBtn.style.display = 'none';
+        grantSearchInput.blur();
+        renderInternalGrants();
+      }
+    });
+  }
+
+  // Quick grant search chips
+  document.querySelectorAll('.grant-quick-tag-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const term = chip.getAttribute('data-grant-search') || chip.textContent.trim();
+      if (grantSearchInput) {
+        grantSearchInput.value = term;
+        grantSearchQuery = term;
+        if (clearGrantSearchBtn) clearGrantSearchBtn.style.display = 'flex';
+        if (currentGrantCategory !== 'all') {
+          currentGrantCategory = 'all';
+          document.querySelectorAll('.grants-category-tabs .tab-btn').forEach(b => {
+            b.classList.toggle('active', b.id === 'grant-tab-all');
+          });
+        }
+        renderInternalGrants();
+        const grantsGrid = document.getElementById('internalGrantsGrid');
+        if (grantsGrid) {
+          grantsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+}
+
+/* ==========================================================================
+   4.3 NAVIGATION, TOAST & SMOOTH SCROLL MECHANICS
    ========================================================================== */
 function initScrollAndNav() {
   const mainHeader = document.getElementById('mainHeader');
@@ -2539,7 +2663,6 @@ function renderStaff() {
 
   staffGrid.innerHTML = activeData.contacts.map(staff => `
     <article class="staff-card glass-panel">
-      <div class="staff-avatar" aria-hidden="true">${staff.avatar}</div>
       <h3>${staff.name}</h3>
       <div class="staff-position">${staff.position}</div>
       <p class="staff-role">${staff.role}</p>
@@ -2595,8 +2718,12 @@ ${message}
 
     const body = encodeURIComponent(bodyText);
 
-    // เปิดเมลไคลเอนต์หลักของผู้ใช้
-fetch('http://localhost:3001/api/contact', {
+    // ส่งข้อมูลแบบฟอร์มไปยังระบบอีเมล
+    const contactApiUrl = window.location.protocol.startsWith('http')
+      ? '/api/contact'
+      : 'http://localhost:3000/api/contact';
+
+    fetch(contactApiUrl, {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'

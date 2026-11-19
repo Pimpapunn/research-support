@@ -1,8 +1,13 @@
 const TRANSLATIONS = {
   th: {
     // Header & Hero
-    portal_title: "งานบริหารงานวิจัยฯ",
+    portal_title: "งานบริหารงานวิจัยและวิเทศสัมพันธ์",
     portal_subtitle: "คณะสังคมศาสตร์ มหาวิทยาลัยเชียงใหม่",
+    nav_home: "หน้าแรก",
+    nav_processes: "กระบวนการขั้นตอน การดำเนินโครงการวิจัย",
+    nav_internal_grants: "ทุนวิจัยภายใน มช.",
+    nav_related_systems: "ระบบที่เกี่ยวข้อง",
+    nav_contact: "ติดต่อเจ้าหน้าที่",
     // hero_tag: "ระบบสนับสนุนการปฏิบัติงานด้านวิจัยคณาจารย์และนักวิจัย",
     hero_title: "การดำเนินงานและกระบวนการขั้นตอน",
     hero_title_accent: "การบริหารงานวิจัยฯ",
@@ -108,8 +113,13 @@ const TRANSLATIONS = {
   },
   en: {
     // Header & Hero
-    portal_title: "Research Administration",
+    portal_title: "Research Administration and International Relations",
     portal_subtitle: "Faculty of Social Sciences, Chiang Mai University",
+    nav_home: "Home",
+    nav_processes: "Research Project Processes & Procedures",
+    nav_internal_grants: "CMU Internal Grants",
+    nav_related_systems: "Related Systems",
+    nav_contact: "Contact Staff",
     hero_tag: "Research Operations Support System for Faculty and Researchers",
     hero_title: "Operations and Procedures of",
     hero_title_accent: "Research Administration",
