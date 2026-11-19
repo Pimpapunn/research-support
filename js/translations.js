@@ -3,17 +3,17 @@ const TRANSLATIONS = {
     // Header & Hero
     portal_title: "งานบริหารงานวิจัยฯ",
     portal_subtitle: "คณะสังคมศาสตร์ มหาวิทยาลัยเชียงใหม่",
-    hero_tag: "ระบบสนับสนุนการปฏิบัติงานด้านวิจัยคณาจารย์และนักวิจัย",
+    // hero_tag: "ระบบสนับสนุนการปฏิบัติงานด้านวิจัยคณาจารย์และนักวิจัย",
     hero_title: "การดำเนินงานและกระบวนการขั้นตอน",
     hero_title_accent: "การบริหารงานวิจัยฯ",
     hero_subtitle: "อธิบายและแนะนำขั้นตอนการดำเนินการอย่างเป็นระบบ ครอบคลุมขั้นตอนการยื่นเสนอโครงการ สัญญารับทุน ขออนุมัติเปิดบัญชี เบิกจ่ายเงินงวด และการสนับสนุนงานด้านวิจัย คณะสังคมศาสตร์ มหาวิทยาลัยเชียงใหม่",
-    
+
     // Search & Filter
     search_placeholder: "ค้นหาตามชื่องานวิจัย ขั้นตอน บริการ หรือแบบฟอร์ม...",
     clear_search: "ล้างคำค้นหา",
     empty_results_title: "ไม่พบข้อมูลการให้บริการที่ตรงกับคำค้นหาของคุณ",
     empty_results_desc: 'ลองค้นหาด้วยคำอื่น เช่น "เปิดบัญชี", "เบิกเงินงวด", "Page Charge", "ยุทธศาสตร์" เป็นต้น',
-    
+
     // Chatbot Welcome & Floating UI
     chat_float_title: "ผู้ช่วยงานวิจัย",
     chat_float_tooltip: "มีอะไรให้ช่วย? 👋",
@@ -21,7 +21,7 @@ const TRANSLATIONS = {
     chat_welcome_title: "มีอะไรให้ช่วย?",
     chat_welcome_desc: "หากคุณไม่แน่ใจว่าต้องใช้บริการในหัวข้อใด หรือต้องการเตรียมเอกสารแบบใด ลองถามตอบสั้นๆ เพื่อให้พี่วิจัยค้นหาคำตอบและบริการที่เหมาะกับคุณได้ทันที!",
     chat_start_btn: "เริ่มต้นใช้งาน",
-    
+
     // Related Systems
     related_systems_title: "ระบบที่เกี่ยวข้องในการดำเนินงาน (Related Systems for Research)",
     related_systems_desc_th: "รวมระบบสารสนเทศที่ใช้สนับสนุนการปฏิบัติงานวิจัยและการดำเนินงานต่างๆ",
@@ -34,7 +34,7 @@ const TRANSLATIONS = {
     eresearch_desc: "ระบบฐานข้อมูลโครงการวิจัยของคณาจารย์และนักวิจัย คณะสังคมศาสตร์ มช.",
     gdrive_title: "คลังเอกสารงานวิจัย",
     gdrive_desc: "แบบฟอร์ม คู่มือ และเอกสารอ้างอิงทั้งหมดสำหรับการบริหารงานวิจัย จัดเก็บบน Google Drive พร้อมดาวน์โหลด",
-    
+
     // Internal Grants (ทุนวิจัยภายใน มช.)
     nav_internal_grants: "ทุนวิจัยภายใน มช.",
     internal_grants_badge: "ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่",
@@ -67,11 +67,11 @@ const TRANSLATIONS = {
     form_email_placeholder: "อีเมลติดต่อกลับ",
     form_msg_placeholder: "พิมพ์ข้อความหรือคำถามที่ต้องการปรึกษา...",
     form_submit_btn: "ส่งข้อความ",
-    
+
     // Helpdesk / Staff
     helpdesk_title: "ฝ่ายบริหารงานวิจัยและวิเทศสัมพันธ์",
     helpdesk_desc: "ทีมงานเจ้าหน้าที่คอยช่วยเหลือ ให้คำแนะนำ และอำนวยความสะดวกกระบวนงานวิจัยทุกขั้นตอน ติดต่อสอบถามรายละเอียดหรือนัดหมายปรึกษาล่วงหน้าได้ทันที",
-    
+
     // Footer
     footer_desc: "งานบริหารงานวิจัยและวิเทศสัมพันธ์ คณะสังคมศาสตร์ มหาวิทยาลัยเชียงใหม่. ออกแบบและพัฒนาสำหรับสนับสนุนคณาจารย์และนักวิจัย มช.",
     footer_related_title: "หน่วยงานที่เกี่ยวข้อง",
@@ -81,7 +81,7 @@ const TRANSLATIONS = {
     footer_cat_initiation: "ขั้นตอนการเริ่มขอทุนโครงการวิจัย",
     footer_cat_banking: "เกี่ยวกับการเงินและธนาคาร",
     footer_cat_finance: "การเบิกจ่ายงวดเงินและค่าตอบแทน",
-    
+
     // Detail Modal UI
     modal_cat_label: "หมวดหมู่บริการ",
     modal_close_title: "ปิดหน้าต่างรายละเอียด",
@@ -101,7 +101,7 @@ const TRANSLATIONS = {
     modal_tips_title: "ข้อแนะนำและจุดควรระวัง",
     modal_systems_title: "ระบบที่ต้องใช้งานร่วม",
     modal_systems_empty: "ไม่มีระบบเฉพาะเจาะจงใช้งานสำหรับกระบวนการนี้",
-    
+
     // ICS System
     ics_title: "ระบบบริหารและจัดการผลงานทางวิชาการ (ICS)",
     ics_desc: "ระบบสำหรับบันทึกและจัดการผลงานทางวิชาการ การตีพิมพ์ และภาระงานวิจัยของบุคลากรมหาวิทยาลัยเชียงใหม่"
@@ -114,13 +114,13 @@ const TRANSLATIONS = {
     hero_title: "Operations and Procedures of",
     hero_title_accent: "Research Administration",
     hero_subtitle: "Systematic guidelines and procedures for project proposals, grant agreements, bank accounts, disbursements, and research support at the Faculty of Social Sciences, Chiang Mai University.",
-    
+
     // Search & Filter
     search_placeholder: "Search by research title, procedure, service, or form...",
     clear_search: "Clear search query",
     empty_results_title: "No services matching your search query were found.",
     empty_results_desc: 'Try searching with other terms such as "Open Account", "Installment", "Page Charge", "Strategy", etc.',
-    
+
     // Chatbot Welcome & Floating UI
     chat_float_title: "Research Assistant",
     chat_float_tooltip: "Need help? 👋",
@@ -128,7 +128,7 @@ const TRANSLATIONS = {
     chat_welcome_title: "Need help?",
     chat_welcome_desc: "If you are unsure about which service or documents you need, answer these quick questions so we can find the right match for you immediately!",
     chat_start_btn: "Get Started",
-    
+
     // Related Systems
     related_systems_title: "Related Systems for Research Administration",
     related_systems_desc_th: "รวมระบบสารสนเทศที่ใช้สนับสนุนการปฏิบัติงานวิจัยและการดำเนินงานต่างๆ",
@@ -141,7 +141,7 @@ const TRANSLATIONS = {
     eresearch_desc: "Research project database system of the Faculty of Social Sciences, CMU.",
     gdrive_title: "Research Document Archive",
     gdrive_desc: "All forms, manuals, and reference documents for research administration stored on Google Drive.",
-    
+
     // Internal Grants (ทุนวิจัยภายใน มช.)
     nav_internal_grants: "CMU Internal Grants",
     internal_grants_badge: "Chiang Mai University Funding Schemes",
@@ -174,11 +174,11 @@ const TRANSLATIONS = {
     form_email_placeholder: "Email Address",
     form_msg_placeholder: "Type your message here...",
     form_submit_btn: "Send Message",
-    
+
     // Helpdesk / Staff
     helpdesk_title: "Research Administration & International Relations",
     helpdesk_desc: "Our team is here to help, guide, and facilitate every step of your research. Contact us for details or schedule a consultation.",
-    
+
     // Footer
     footer_desc: "Research Administration and International Relations, Faculty of Social Sciences, Chiang Mai University. Designed and developed to support CMU faculty and researchers.",
     footer_related_title: "Related Agencies",
@@ -188,7 +188,7 @@ const TRANSLATIONS = {
     footer_cat_initiation: "Research Grant Initiation",
     footer_cat_banking: "Finance and Banking",
     footer_cat_finance: "Disbursements and Academic Incentives",
-    
+
     // Detail Modal UI
     modal_cat_label: "Category",
     modal_close_title: "Close Details Window",
@@ -208,7 +208,7 @@ const TRANSLATIONS = {
     modal_tips_title: "Tips & Cautions",
     modal_systems_title: "Required Systems",
     modal_systems_empty: "No specific system is required for this process.",
-    
+
     // ICS System
     ics_title: "Academic Performance System (ICS)",
     ics_desc: "CMU database system for recording and managing academic publications, research portfolios, and workloads."
@@ -220,7 +220,7 @@ const RESEARCH_DATA_EN = {
     { id: 'all', title: 'All Services', icon: 'grid_view' },
     { id: 'initiation', title: '1. Grant Initiation', icon: 'create_new_folder', description: 'Steps for project submission, grant contracts, and research database record-keeping.' },
     { id: 'banking', title: '2. Finance & Banking', icon: 'account_balance', description: 'Steps for requesting bank account opening/closure for research projects and preparing bank letters.' },
-    { id: 'operation', title: '3. Project Operations', icon: 'folder_open', description: 'Steps during project implementation, document tracking, and general coordination.' },   
+    { id: 'operation', title: '3. Project Operations', icon: 'folder_open', description: 'Steps during project implementation, document tracking, and general coordination.' },
     { id: 'grant', title: '4. Contracts & Authorization', icon: 'assignment_turned_in', description: 'Steps for drafting grant agreements and requesting delegation of authority from the university.' },
     { id: 'finance', title: '5. Disbursements & Contributions', icon: 'payments', description: 'Steps for outer-source project installment claims, publication incentives, and institutional overhead contributions.' }
   ],
