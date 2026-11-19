@@ -35,10 +35,22 @@ const TRANSLATIONS = {
     gdrive_title: "คลังเอกสารงานวิจัย",
     gdrive_desc: "แบบฟอร์ม คู่มือ และเอกสารอ้างอิงทั้งหมดสำหรับการบริหารงานวิจัย จัดเก็บบน Google Drive พร้อมดาวน์โหลด",
     
+    // Internal Grants (ทุนวิจัยภายใน มช.)
+    nav_internal_grants: "ทุนวิจัยภายใน มช.",
+    internal_grants_badge: "ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่",
+    internal_grants_title: "ทุนวิจัยภายใน มหาวิทยาลัยเชียงใหม่",
+    internal_grants_desc: "รวบรวมประกาศ เกณฑ์การจัดสรร แบบฟอร์มคำขอ และขั้นตอนการขอรับทุนสนับสนุนการวิจัยและผลงานวิชาการของมหาวิทยาลัยเชียงใหม่ ครบทั้ง 7 ด้าน",
+    gdrive_hub_title: "คลังเอกสารและแบบฟอร์มทุนวิจัยทั้งหมด (RAIS-SOCCMU บน Google Drive)",
+    gdrive_hub_desc: "ดาวน์โหลดประกาศฉบับเต็ม แบบฟอร์มขอรับทุน และเอกสารแนบทุกหมวดหมู่ จัดเก็บเป็นระบบบน Google Drive คณะสังคมศาสตร์ มช.",
+    gdrive_hub_btn: "เปิดโฟลเดอร์ Google Drive ↗",
+    grant_tab_announcements: "ประกาศและหลักเกณฑ์",
+    grant_tab_forms: "แบบฟอร์ม & เอกสารที่ต้องใช้",
+    grant_tab_steps: "ขั้นตอนการดำเนินการ",
+
     // Contact Section
-    contact_title: "Contact Our Research Support Team",
-    contact_subtitle: "Our team is ready to assist you with research administration, funding procedures, documentation, and publication support.",
-    staff_title: "Research Administration Support",
+    contact_title: "ติดต่อทีมงานบริหารงานวิจัย",
+    contact_subtitle: "ทีมงานพร้อมให้คำปรึกษา แนะนำระเบียบขั้นตอนการเตรียมเอกสาร และสนับสนุนกระบวนงานวิจัยทุกขั้นตอน",
+    staff_title: "งานบริหารงานวิจัยและวิเทศสัมพันธ์",
     staff_dept: "เจ้าหน้าที่งานบริหารงานวิจัยและวิเทศสัมพันธ์",
     staff_desc: "พวกเรายินดีให้คำปรึกษา แนะนำขั้นตอนการเตรียมเอกสาร และอำนวยความสะดวกในทุกกระบวนงานวิจัยของคณาจารย์และนักวิจัยคณะสังคมศาสตร์ทุกท่าน",
     badge_guide: "แนะนำขั้นตอน",
@@ -50,11 +62,11 @@ const TRANSLATIONS = {
     info_phone_desc: "053-943528",
     info_email_title: "อีเมลติดต่อโดยตรง",
     info_email_desc: "rais.soc.pim@gmail.com",
-    form_title: "Send Us a Message!",
-    form_name_placeholder: "Your Name",
-    form_email_placeholder: "Email Address",
-    form_msg_placeholder: "Type your message here",
-    form_submit_btn: "GIVE US A SHOT",
+    form_title: "ส่งข้อความถึงเจ้าหน้าที่",
+    form_name_placeholder: "ชื่อ-นามสกุลของคุณ",
+    form_email_placeholder: "อีเมลติดต่อกลับ",
+    form_msg_placeholder: "พิมพ์ข้อความหรือคำถามที่ต้องการปรึกษา...",
+    form_submit_btn: "ส่งข้อความ",
     
     // Helpdesk / Staff
     helpdesk_title: "ฝ่ายบริหารงานวิจัยและวิเทศสัมพันธ์",
@@ -130,6 +142,18 @@ const TRANSLATIONS = {
     gdrive_title: "Research Document Archive",
     gdrive_desc: "All forms, manuals, and reference documents for research administration stored on Google Drive.",
     
+    // Internal Grants (ทุนวิจัยภายใน มช.)
+    nav_internal_grants: "CMU Internal Grants",
+    internal_grants_badge: "Chiang Mai University Funding Schemes",
+    internal_grants_title: "CMU Internal Research Grants",
+    internal_grants_desc: "Comprehensive guidelines, official announcements, application forms, and procedures for Chiang Mai University research grants and academic awards across 7 funding schemes.",
+    gdrive_hub_title: "Research Grants Archive & Documents (RAIS-SOCCMU on Google Drive)",
+    gdrive_hub_desc: "Download official announcements, grant application forms, and appendices organized in Google Drive.",
+    gdrive_hub_btn: "Open Google Drive Folder ↗",
+    grant_tab_announcements: "Announcements & Regulations",
+    grant_tab_forms: "Forms & Required Documents",
+    grant_tab_steps: "Application Steps",
+
     // Contact Section
     contact_title: "Contact Our Research Support Team",
     contact_subtitle: "Our team is ready to assist you with research administration, funding procedures, documentation, and publication support.",
@@ -145,11 +169,11 @@ const TRANSLATIONS = {
     info_phone_desc: "053-943528",
     info_email_title: "Direct Email",
     info_email_desc: "rais.soc.pim@gmail.com",
-    form_title: "Send Us a Message!",
+    form_title: "Send Us a Message",
     form_name_placeholder: "Your Name",
     form_email_placeholder: "Email Address",
-    form_msg_placeholder: "Type your message here",
-    form_submit_btn: "GIVE US A SHOT",
+    form_msg_placeholder: "Type your message here...",
+    form_submit_btn: "Send Message",
     
     // Helpdesk / Staff
     helpdesk_title: "Research Administration & International Relations",
@@ -740,3 +764,373 @@ const CHAT_FLOW_EN = {
     ]
   }
 };
+
+/**
+ * English version of CMU Internal Research Grants dataset
+ */
+const INTERNAL_GRANTS_DATA_EN = {
+  categories: [
+    { id: 'all', title: 'All Grants (7)', icon: 'apps' },
+    { id: 'incentive', title: '1. Incentives & APC', icon: 'payments' },
+    { id: 'conference', title: '2. International Conference', icon: 'flight_takeoff' },
+    { id: 'collaborative', title: '3. Collaborative & Visiting', icon: 'handshake' },
+    { id: 'career', title: '4. Early & Mid-Career', icon: 'trending_up' }
+  ],
+  grants: [
+    {
+      id: 'grant-1',
+      number: '1',
+      category: 'incentive',
+      title: 'Academic Publication Rewards & Incentives',
+      icon: 'military_tech',
+      badgeColor: 'blue',
+      summary: 'Financial support and remuneration for academic publications and research published in high-impact international journals.',
+      announcements: [
+        {
+          title: 'CMU Announcement on Expenditure Categories: Academic Incentives & APC (No. 13/2023)',
+          file: 'data_research/ประกาศ-มช.-กำหนดประเภทรายจ่าย-13-2566-ค่าตอบแทน-APC.pdf',
+          type: 'pdf',
+          badge: 'Official Reg'
+        },
+        {
+          title: 'CMU Announcement No. 27/2023: Review Articles and NLSC Journal Rewards',
+          file: 'data_research/ประกาศ มช.27_2566_ค่าตอบแทน Review article NLSC.pdf',
+          type: 'pdf',
+          badge: 'Supplement'
+        }
+      ],
+      forms: [
+        {
+          title: 'Application Form for Academic Publication Reward (Revised 19 Apr 2023)',
+          file: 'data_research/แบบฟอร์ม-คำขอรับเงิน-ค่าตอบแทน-19-04-66.docx',
+          type: 'docx',
+          badge: 'Main Form'
+        },
+        {
+          title: 'Request Form for H-Index Year 2024 (Word)',
+          file: 'data_research/FORM Request H-Index_2024.docx',
+          type: 'docx',
+          badge: 'Attachment'
+        },
+        {
+          title: 'Request Form for H-Index Year 2024 (PDF)',
+          file: 'data_research/FORM Request H-Index_2024.pdf',
+          type: 'pdf',
+          badge: 'Attachment'
+        }
+      ],
+      steps: [
+        { step: 1, desc: 'Verify publication eligibility against CMU Announcements No. 13/2023 and 27/2023.' },
+        { step: 2, desc: 'Fill out the Academic Publication Reward Form and H-Index Request Form.' },
+        { step: 3, desc: 'Attach full paper reprint and proof of international index listing (Scopus / Web of Science).' },
+        { step: 4, desc: 'Submit through Department Head to Faculty Research Administration for processing.' }
+      ],
+      driveLink: 'https://drive.google.com/drive/folders/1z5mBL4Oxap1ggsoK1C28kwDW_JAHopWC?usp=drive_link'
+    },
+    {
+      id: 'grant-2',
+      number: '2',
+      category: 'incentive',
+      title: 'Article Processing Charge (APC) Support',
+      icon: 'auto_stories',
+      badgeColor: 'teal',
+      summary: 'Financial support for publication fees in peer-reviewed international Open Access journals listed in international databases.',
+      announcements: [
+        {
+          title: 'CMU Announcement on Expenditure Categories: Academic Incentives & APC (No. 13/2023)',
+          file: 'data_research/ประกาศ-มช.-กำหนดประเภทรายจ่าย-13-2566-ค่าตอบแทน-APC.pdf',
+          type: 'pdf',
+          badge: 'Official Reg'
+        }
+      ],
+      forms: [
+        {
+          title: 'APC Request Form (Revised 19 Apr 2023)',
+          file: 'data_research/แบบฟอร์ม-คำขอรับเงิน-APC-19-04-66.docx',
+          type: 'docx',
+          badge: 'Main Form'
+        },
+        {
+          title: 'Publisher Invoice or Official Receipt',
+          type: 'doc',
+          badge: 'Required'
+        },
+        {
+          title: 'Journal Quartile Ranking Proof (Q1 / Q2 SJR or JCR)',
+          type: 'doc',
+          badge: 'Attachment'
+        }
+      ],
+      steps: [
+        { step: 1, desc: 'Check journal quartile eligibility and CMU criteria.' },
+        { step: 2, desc: 'Complete APC Request Form and attach Acceptance Letter and Invoice/Receipt.' },
+        { step: 3, desc: 'Verify CMU Faculty of Social Sciences affiliation is explicitly stated in author affiliations.' },
+        { step: 4, desc: 'Submit documents via Department to Faculty Research Administration for reimbursement.' }
+      ],
+      driveLink: 'https://drive.google.com/drive/folders/1z5mBL4Oxap1ggsoK1C28kwDW_JAHopWC?usp=drive_link'
+    },
+    {
+      id: 'grant-3',
+      number: '3',
+      category: 'conference',
+      title: 'International Conference Travel Grant 2026',
+      icon: 'flight_takeoff',
+      badgeColor: 'purple',
+      summary: 'Travel grant supporting CMU faculty, researchers, and personnel to present peer-reviewed research papers at international academic conferences abroad.',
+      announcements: [
+        {
+          title: 'CMU ORA Announcement: International Conference Presentation Grant Fiscal Year 2026',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'pdf',
+          badge: 'CMU ORA'
+        },
+        {
+          title: 'Budget Allocation Rates and Guidelines by Destination Country Group',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'pdf',
+          badge: 'Guidelines'
+        }
+      ],
+      forms: [
+        {
+          title: 'Application Form for Overseas Conference Grant (ORA CMU Form)',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'docx',
+          badge: 'Application'
+        },
+        {
+          title: 'Budget Calculation Appendix Form (Excel)',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'xlsx',
+          badge: 'Budget Excel'
+        },
+        {
+          title: 'Official Acceptance Letter from Conference Organizer',
+          type: 'pdf',
+          badge: 'Required'
+        },
+        {
+          title: 'Full Research Paper or Peer-Reviewed Extended Abstract',
+          type: 'pdf',
+          badge: 'Required'
+        },
+        {
+          title: 'Co-Author Consent Form (If multiple authors)',
+          type: 'docx',
+          badge: 'Attachment'
+        }
+      ],
+      steps: [
+        { step: 1, desc: 'Prepare Application Form, Budget Excel Appendix, and Official Acceptance Letter.' },
+        { step: 2, desc: 'Submit online grant application via the CMU Research system.' },
+        { step: 3, desc: 'Forward formal memo via Department through CMU e-Document to ORA AT LEAST 80 WORKING DAYS PRIOR TO TRAVEL (Strict Rule).' },
+        { step: 4, desc: 'ORA CMU reviews submissions in monthly cycles and announces approved grants.' },
+        { step: 5, desc: 'Upon return, submit attendance report and expense reimbursement documentation.' }
+      ],
+      driveLink: 'https://drive.google.com/drive/folders/1z5mBL4Oxap1ggsoK1C28kwDW_JAHopWC?usp=drive_link',
+      oraLink: 'https://ora.oou.cmu.ac.th/'
+    },
+    {
+      id: 'grant-4',
+      number: '4',
+      category: 'collaborative',
+      title: 'Matching Fund for External Research Grants',
+      icon: 'handshake',
+      badgeColor: 'amber',
+      summary: 'CMU counterpart matching fund supporting research projects that receive primary research funding from external public, private, or industrial partners (Grant Code: MF).',
+      announcements: [
+        {
+          title: 'Call for Proposals: Matching Fund Research Scheme (MF) Fiscal Year',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'pdf',
+          badge: 'ORA Call'
+        },
+        {
+          title: 'CMU Matching Fund Contribution Ratios and Guidelines',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'pdf',
+          badge: 'Guidelines'
+        }
+      ],
+      forms: [
+        {
+          title: 'Full Research Proposal submitted to external funding agency',
+          type: 'doc',
+          badge: 'Full Proposal'
+        },
+        {
+          title: 'Official Letter of Commitment or Award confirmation from external sponsor',
+          type: 'pdf',
+          badge: 'Required'
+        },
+        {
+          title: 'CMU Matching Fund Request Form',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'docx',
+          badge: 'Form'
+        }
+      ],
+      steps: [
+        { step: 1, desc: 'Check matching fund criteria and co-funding ratio required by external sponsor and CMU.' },
+        { step: 2, desc: 'Prepare Full Proposal along with external commitment letters.' },
+        { step: 3, desc: 'Submit application via CMU Research system or email research-ora@cmu.ac.th.' },
+        { step: 4, desc: 'Committee reviews and issues matching fund guarantee letter for contract execution.' }
+      ],
+      driveLink: 'https://drive.google.com/drive/folders/1z5mBL4Oxap1ggsoK1C28kwDW_JAHopWC?usp=drive_link',
+      oraLink: 'https://ora.oou.cmu.ac.th/'
+    },
+    {
+      id: 'grant-5',
+      number: '5',
+      category: 'collaborative',
+      title: 'Visiting Researcher / Professor Scheme',
+      icon: 'public',
+      badgeColor: 'cyan',
+      summary: 'Support for inviting prominent international scholars and scientists to conduct research, transfer expertise, and co-publish international papers at Chiang Mai University.',
+      announcements: [
+        {
+          title: 'CMU Regulation on Visiting Researcher / Visiting Professor Support',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'pdf',
+          badge: 'Official Reg'
+        },
+        {
+          title: 'Eligibility Criteria and Remuneration / Housing Allowance Rates',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'pdf',
+          badge: 'Criteria'
+        }
+      ],
+      forms: [
+        {
+          title: 'Proposal Form for Visiting Researcher / Professor Collaboration',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'docx',
+          badge: 'Form'
+        },
+        {
+          title: 'Curriculum Vitae and Publication Record of the Visiting Scholar',
+          type: 'pdf',
+          badge: 'Required'
+        },
+        {
+          title: 'Research Plan, Guest Lecture Plan, and Joint Q1/Q2 Publication Targets',
+          type: 'doc',
+          badge: 'Work Plan'
+        }
+      ],
+      steps: [
+        { step: 1, desc: 'CMU host faculty contacts visiting scholar and formulates joint collaboration proposal.' },
+        { step: 2, desc: 'Prepare CV, work plan, lecture schedule, and scholar letter of willingness.' },
+        { step: 3, desc: 'Submit proposal via CMU Research and formal memo via e-Document to ORA CMU.' },
+        { step: 4, desc: 'Upon approval, issue formal invitation letter, facilitate visa, and prepare host lab/office.' }
+      ],
+      driveLink: 'https://drive.google.com/drive/folders/1z5mBL4Oxap1ggsoK1C28kwDW_JAHopWC?usp=drive_link',
+      oraLink: 'https://ora.oou.cmu.ac.th/'
+    },
+    {
+      id: 'grant-6',
+      number: '6',
+      category: 'career',
+      title: 'Early Career Researcher Development Grant',
+      icon: 'psychology',
+      badgeColor: 'emerald',
+      summary: 'Internal research grant designed to jumpstart research careers of new faculty and early career researchers, fostering high-impact publications and competitive research tracks.',
+      announcements: [
+        {
+          title: 'Call for Proposals: Early Career Researcher Development Grant Fiscal Year',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'pdf',
+          badge: 'ORA Call'
+        },
+        {
+          title: 'Funding Cap, Minimum Output Requirements, and Researcher Eligibility',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'pdf',
+          badge: 'Guidelines'
+        }
+      ],
+      forms: [
+        {
+          title: 'Research Proposal Form for Early Career Researcher Scheme',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'docx',
+          badge: 'Form'
+        },
+        {
+          title: 'Budget Plan and Project Milestone Worksheet',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'xlsx',
+          badge: 'Budget'
+        },
+        {
+          title: 'Academic CV of Principal Investigator and Research Mentor (if applicable)',
+          type: 'doc',
+          badge: 'CV'
+        }
+      ],
+      steps: [
+        { step: 1, desc: 'Check early career eligibility criteria (years after appointment / Ph.D. graduation).' },
+        { step: 2, desc: 'Draft proposal following ORA guidelines with clear international publication targets.' },
+        { step: 3, desc: 'Submit proposal via the CMU Research system during open call window.' },
+        { step: 4, desc: 'Undergo peer review and grant agreement execution upon award announcement.' }
+      ],
+      driveLink: 'https://drive.google.com/drive/folders/1z5mBL4Oxap1ggsoK1C28kwDW_JAHopWC?usp=drive_link',
+      oraLink: 'https://ora.oou.cmu.ac.th/'
+    },
+    {
+      id: 'grant-7',
+      number: '7',
+      category: 'career',
+      title: 'Mid-Career Researcher Development Grant',
+      icon: 'trending_up',
+      badgeColor: 'indigo',
+      summary: 'Empowering mid-career researchers with proven track records to advance research leadership, spearhead strategic initiatives, and build high-impact research clusters.',
+      announcements: [
+        {
+          title: 'Call for Proposals: Mid-Career Researcher Development Grant Fiscal Year',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'pdf',
+          badge: 'ORA Call'
+        },
+        {
+          title: 'Evaluation Criteria, Expected Socio-Academic Impact, and High-Tier Deliverables',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'pdf',
+          badge: 'Criteria'
+        }
+      ],
+      forms: [
+        {
+          title: 'Strategic Research Proposal Form for Mid-Career Scheme',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'docx',
+          badge: 'Form'
+        },
+        {
+          title: 'Multi-Year Budget and Deliverables Timeline Worksheet',
+          url: 'https://ora.oou.cmu.ac.th/',
+          type: 'xlsx',
+          badge: 'Budget'
+        },
+        {
+          title: 'Comprehensive Research Track Record and Research Group Expansion Plan',
+          type: 'doc',
+          badge: 'Track Record'
+        }
+      ],
+      steps: [
+        { step: 1, desc: 'Verify mid-career track record and past publication metrics against regulations.' },
+        { step: 2, desc: 'Formulate strategic project proposal geared toward future external grant scaling.' },
+        { step: 3, desc: 'Submit online proposal in the CMU Research system before deadline.' },
+        { step: 4, desc: 'Committee review, grant award notification, and research contract signing.' }
+      ],
+      driveLink: 'https://drive.google.com/drive/folders/1z5mBL4Oxap1ggsoK1C28kwDW_JAHopWC?usp=drive_link',
+      oraLink: 'https://ora.oou.cmu.ac.th/'
+    }
+  ]
+};
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { TRANSLATIONS, RESEARCH_DATA_EN, CHAT_FLOW_EN, INTERNAL_GRANTS_DATA_EN };
+}

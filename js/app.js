@@ -8,12 +8,19 @@
 
 // รักษาสถานะระบบ (Global States)
 let currentCategory = 'all';
+let currentGrantCategory = 'all';
 let searchQuery = '';
 let activeService = null;
 let activeModalTab = 'workflow';
 let chatHistory = [];
 let currentChatStep = 'start';
 let currentLang = localStorage.getItem('lang') || 'th';
+
+function getActiveGrantsData() {
+  return currentLang === 'en' 
+    ? (typeof INTERNAL_GRANTS_DATA_EN !== 'undefined' ? INTERNAL_GRANTS_DATA_EN : INTERNAL_GRANTS_DATA)
+    : INTERNAL_GRANTS_DATA;
+}
 
 // รายการไฟล์ที่มีในโฟลเดอร์ data_research
 const AVAILABLE_RESEARCH_FILES = [
@@ -43,11 +50,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initLanguage();
   renderCategories();
   renderServices();
+  renderGrantCategories();
+  renderInternalGrants();
   renderStaff();
   initSearch();
   initModalEvents();
   initChatEvents();
   initContactForm();
+  initScrollAndNav();
 });
 
 /* ==========================================================================
@@ -252,8 +262,26 @@ function updateLanguageUI() {
   const btnTabGeneratorSpan = document.querySelector('#btnTabGenerator span:nth-child(2)');
   if (btnTabGeneratorSpan) btnTabGeneratorSpan.textContent = dict.tab_generator;
 
+  // Update Internal Grants Section localization
+  const internalGrantsBadge = document.getElementById('internalGrantsBadgeText');
+  if (internalGrantsBadge) internalGrantsBadge.textContent = dict.internal_grants_badge || 'ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่';
+  const internalGrantsTitle = document.getElementById('internalGrantsTitleText');
+  if (internalGrantsTitle) internalGrantsTitle.textContent = dict.internal_grants_title || 'ทุนวิจัยภายใน (ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่)';
+  const internalGrantsDesc = document.getElementById('internalGrantsDescText');
+  if (internalGrantsDesc) internalGrantsDesc.textContent = dict.internal_grants_desc || 'รวบรวมประกาศรับสมัคร เกณฑ์การจัดสรร แบบฟอร์มคำขอ และขั้นตอนการขอรับทุนสนับสนุนการวิจัยและผลงานวิชาการของมหาวิทยาลัยเชียงใหม่';
+
+  const gdriveHubTitle = document.getElementById('gdriveHubTitle');
+  if (gdriveHubTitle) gdriveHubTitle.textContent = dict.gdrive_hub_title || 'คลังเอกสารและแบบฟอร์มทุนวิจัยทั้งหมด (RAIS-SOCCMU บน Google Drive)';
+  const gdriveHubDesc = document.getElementById('gdriveHubDesc');
+  if (gdriveHubDesc) gdriveHubDesc.textContent = dict.gdrive_hub_desc || 'เข้าถึงเอกสาร ประกาศ และแบบฟอร์มขอรับทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่ทั้งหมดได้โดยตรงบน Google Drive พร้อมดาวน์โหลด';
+
+  const navGrantsLink = document.querySelector('.header-nav-link.highlight-nav-link');
+  if (navGrantsLink) navGrantsLink.textContent = dict.nav_internal_grants || 'ทุนวิจัยภายใน มช.';
+
   renderCategories();
   renderServices();
+  renderGrantCategories();
+  renderInternalGrants();
   renderStaff();
   
   const chatBody = document.getElementById('assistantChatBody');
@@ -308,25 +336,28 @@ function renderCategories() {
   const categoryTabs = document.getElementById('categoryTabs');
   if (!categoryTabs) return;
 
-  const cats = getActiveData().categories;
-  const row1 = cats.slice(0, 3);
-  const row2 = cats.slice(3, 6);
+  const activeData = getActiveData();
+  const cats = activeData.categories;
+  const services = activeData.services;
+
+  const getCount = (catId) => {
+    if (catId === 'all') return services.length;
+    return services.filter(s => s.category === catId).length;
+  };
 
   const renderBtn = cat => `
     <button class="tab-btn ${cat.id === currentCategory ? 'active' : ''}" 
             onclick="filterCategory('${cat.id}')" 
             id="tab-${cat.id}">
       <span class="material-icons">${cat.icon}</span>
-      <span>${cat.title}</span>
+      <span class="tab-btn-title">${cat.title}</span>
+      <span class="tab-count-badge">${getCount(cat.id)}</span>
     </button>
   `;
 
   categoryTabs.innerHTML = `
-    <div class="category-row row-1">
-      ${row1.map(renderBtn).join('')}
-    </div>
-    <div class="category-row row-2">
-      ${row2.map(renderBtn).join('')}
+    <div class="category-pill-bar">
+      ${cats.map(renderBtn).join('')}
     </div>
   `;
 }
@@ -335,7 +366,7 @@ function filterCategory(catId) {
   currentCategory = catId;
 
   // อัปเดตสถานะปุ่ม Active
-  document.querySelectorAll('.tab-btn').forEach(btn => {
+  document.querySelectorAll('#categoryTabs .tab-btn').forEach(btn => {
     btn.classList.remove('active');
   });
   const activeBtn = document.getElementById(`tab-${catId}`);
@@ -383,7 +414,12 @@ function renderServices() {
 
   servicesGrid.innerHTML = filteredServices.map(service => {
     const catObj = activeData.categories.find(c => c.id === service.category);
-    const readGuideLabel = currentLang === 'en' ? 'Read Guide' : 'อ่านคู่มือ';
+    const readGuideLabel = currentLang === 'en' ? 'View Guide & Docs' : 'ดูขั้นตอน & เอกสาร';
+    const numPadded = String(service.number).padStart(2, '0');
+    const stepsCount = service.researcherSteps ? service.researcherSteps.length : 0;
+    const docsCount = service.documents ? service.documents.length : 0;
+    const catTitle = catObj ? catObj.title.replace(/^\d+\.\s*/, '') : '';
+
     return `
       <article class="service-card glass-panel" onclick="openServiceDetail(${service.id})">
         <div class="card-top">
@@ -391,16 +427,36 @@ function renderServices() {
             <div class="card-icon-box">
               <span class="material-icons">${service.icon}</span>
             </div>
-            <div class="service-badge-num">${service.number}</div>
+            <div class="card-header-meta">
+              <span class="service-cat-pill">${catTitle}</span>
+              <span class="service-badge-num">#${numPadded}</span>
+            </div>
           </div>
-          <h3>${service.title}</h3>
-          <p>${service.summary}</p>
+          <h3 class="service-title">${service.title}</h3>
+          <p class="service-summary">${service.summary}</p>
         </div>
+
+        <div class="card-features-row">
+          ${service.hasTemplate ? `
+            <span class="card-feature-pill template-pill" title="${currentLang === 'en' ? 'Includes Word (.docx) memo draft generator' : 'มีระบบช่วยสร้างร่างบันทึกข้อความ Word อัตโนมัติ'}">
+              <span class="material-icons">auto_fix_high</span>
+              <span>${currentLang === 'en' ? 'Smart Memo' : 'ร่างบันทึก Word'}</span>
+            </span>
+          ` : ''}
+          <span class="card-feature-pill" title="${currentLang === 'en' ? 'Researcher Steps' : 'ขั้นตอนดำเนินงานผู้วิจัย'}">
+            <span class="material-icons">timeline</span>
+            <span>${stepsCount} ${currentLang === 'en' ? 'Steps' : 'ขั้นตอน'}</span>
+          </span>
+          <span class="card-feature-pill" title="${currentLang === 'en' ? 'Required Documents' : 'เอกสารที่เกี่ยวข้อง'}">
+            <span class="material-icons">description</span>
+            <span>${docsCount} ${currentLang === 'en' ? 'Docs' : 'เอกสาร'}</span>
+          </span>
+        </div>
+
         <div class="card-footer-row">
-          <span class="service-cat-tag">${catObj ? catObj.title.replace(/^\d+\.\s*/, '') : ''}</span>
           <span class="learn-more-btn">
             <span>${readGuideLabel}</span>
-            <span class="material-icons">chevron_right</span>
+            <span class="material-icons">arrow_forward</span>
           </span>
         </div>
       </article>
@@ -415,27 +471,343 @@ function initSearch() {
   const searchInput = document.getElementById('searchInput');
   const clearSearchBtn = document.getElementById('clearSearchBtn');
 
-  if (!searchInput) return;
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchQuery = e.target.value;
 
-  searchInput.addEventListener('input', (e) => {
-    searchQuery = e.target.value;
+      if (searchQuery.trim().length > 0) {
+        if (clearSearchBtn) clearSearchBtn.style.display = 'flex';
+      } else {
+        if (clearSearchBtn) clearSearchBtn.style.display = 'none';
+      }
 
-    if (searchQuery.trim().length > 0) {
-      clearSearchBtn.style.display = 'flex';
-    } else {
-      clearSearchBtn.style.display = 'none';
+      renderServices();
+    });
+
+    if (clearSearchBtn) {
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        searchQuery = '';
+        clearSearchBtn.style.display = 'none';
+        searchInput.focus();
+        renderServices();
+      });
     }
 
-    renderServices();
+    // Keyboard shortcut: Press "/" to focus search, "Escape" to clear
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement !== searchInput && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
+      } else if (e.key === 'Escape' && document.activeElement === searchInput) {
+        searchInput.value = '';
+        searchQuery = '';
+        if (clearSearchBtn) clearSearchBtn.style.display = 'none';
+        searchInput.blur();
+        renderServices();
+      }
+    });
+  }
+
+  // Quick search keywords tags
+  document.querySelectorAll('.quick-tag-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      const term = chip.getAttribute('data-search') || chip.textContent.trim();
+      if (searchInput) {
+        searchInput.value = term;
+        searchQuery = term;
+        if (clearSearchBtn) clearSearchBtn.style.display = 'flex';
+        renderServices();
+        const servicesSection = document.getElementById('servicesGrid');
+        if (servicesSection) {
+          servicesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+}
+
+/* ==========================================================================
+   4.1 INTERNAL GRANTS (ทุนวิจัยภายใน มช.) RENDERING
+   ========================================================================== */
+function renderGrantCategories() {
+  const container = document.getElementById('grantCategoryTabs');
+  if (!container) return;
+
+  const data = getActiveGrantsData();
+  if (!data || !data.categories) return;
+
+  const grants = data.grants;
+  const getCount = (catId) => {
+    if (catId === 'all') return grants.length;
+    return grants.filter(g => g.category === catId).length;
+  };
+
+  container.innerHTML = `
+    <div class="category-pill-bar">
+      ${data.categories.map(cat => `
+        <button class="tab-btn ${cat.id === currentGrantCategory ? 'active' : ''}"
+                onclick="filterGrantCategory('${cat.id}')"
+                id="grant-tab-${cat.id}">
+          <span class="material-icons">${cat.icon}</span>
+          <span>${cat.title}</span>
+          <span class="tab-count-badge">${getCount(cat.id)}</span>
+        </button>
+      `).join('')}
+    </div>
+  `;
+}
+
+function filterGrantCategory(catId) {
+  currentGrantCategory = catId;
+  document.querySelectorAll('.grants-category-tabs .tab-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  const activeBtn = document.getElementById(`grant-tab-${catId}`);
+  if (activeBtn) activeBtn.classList.add('active');
+  renderInternalGrants();
+}
+
+function renderInternalGrants() {
+  const grid = document.getElementById('internalGrantsGrid');
+  if (!grid) return;
+
+  const data = getActiveGrantsData();
+  if (!data || !data.grants) return;
+
+  const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.th;
+  const filteredGrants = data.grants.filter(grant => {
+    return currentGrantCategory === 'all' || grant.category === currentGrantCategory;
   });
 
-  clearSearchBtn.addEventListener('click', () => {
-    searchInput.value = '';
-    searchQuery = '';
-    clearSearchBtn.style.display = 'none';
-    searchInput.focus();
-    renderServices();
-  });
+  if (filteredGrants.length === 0) {
+    grid.innerHTML = `
+      <div class="empty-results glass-panel">
+        <span class="material-icons">search_off</span>
+        <h4>${dict.empty_results_title || 'ไม่พบรายการทุน'}</h4>
+        <p>${dict.empty_results_desc || 'กรุณาเลือกหมวดหมู่อื่น'}</p>
+      </div>
+    `;
+    return;
+  }
+
+  grid.innerHTML = filteredGrants.map(grant => {
+    const isConference = grant.id === 'grant-3';
+    return `
+      <article class="grant-card glass-panel" id="${grant.id}">
+        <!-- Grant Header -->
+        <div class="grant-header">
+          <div class="grant-badge-row">
+            <span class="grant-num-pill">ทุนลำดับที่ ${grant.number}</span>
+            ${isConference ? `<span class="grant-highlight-badge"><span class="material-icons">event</span> ประจำปี 2569</span>` : ''}
+          </div>
+          <div class="grant-title-row">
+            <div class="grant-icon-box ${grant.badgeColor || 'blue'}">
+              <span class="material-icons">${grant.icon}</span>
+            </div>
+            <div class="grant-title-content">
+              <h3>${grant.title}</h3>
+              <p class="grant-summary-text">${grant.summary}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3-Column / Sub-sections Grid -->
+        <div class="grant-sections-grid">
+          <!-- 1. Announcements -->
+          <div class="grant-sub-box">
+            <div class="grant-sub-header">
+              <span class="material-icons sub-header-icon">campaign</span>
+              <h4>${dict.grant_tab_announcements || 'ประกาศและหลักเกณฑ์'}</h4>
+            </div>
+            <div class="grant-files-list">
+              ${grant.announcements.map(ann => {
+                const isLocal = !!ann.file;
+                const linkHref = isLocal ? ann.file : (ann.url || grant.oraLink || '#');
+                const isPdf = ann.type === 'pdf';
+                return `
+                  <a href="${linkHref}" ${isLocal ? 'download' : 'target="_blank" rel="noopener noreferrer"'} class="grant-file-item">
+                    <div class="file-icon-badge ${isPdf ? 'pdf' : 'doc'}">
+                      <span class="material-icons">${isPdf ? 'picture_as_pdf' : 'description'}</span>
+                    </div>
+                    <div class="file-info-text">
+                      <span class="file-title-name">${ann.title}</span>
+                      <span class="file-meta-pill ${isLocal ? 'local-file' : 'external-link'}">
+                        ${ann.badge || 'ประกาศ'} • ${isLocal ? 'ดาวน์โหลด PDF' : 'ดูประกาศออนไลน์'}
+                      </span>
+                    </div>
+                    <span class="material-icons file-action-icon">${isLocal ? 'download' : 'open_in_new'}</span>
+                  </a>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <!-- 2. Forms -->
+          <div class="grant-sub-box">
+            <div class="grant-sub-header">
+              <span class="material-icons sub-header-icon">edit_document</span>
+              <h4>${dict.grant_tab_forms || 'แบบฟอร์ม & เอกสารที่ต้องใช้'}</h4>
+            </div>
+            <div class="grant-files-list">
+              ${grant.forms.map(form => {
+                const isLocal = !!form.file;
+                const linkHref = isLocal ? form.file : (form.url || grant.driveLink || '#');
+                const fileType = form.type || 'doc';
+                return `
+                  <a href="${linkHref}" ${isLocal ? 'download' : 'target="_blank" rel="noopener noreferrer"'} class="grant-file-item">
+                    <div class="file-icon-badge ${fileType}">
+                      <span class="material-icons">${fileType === 'pdf' ? 'picture_as_pdf' : (fileType === 'xlsx' ? 'table_chart' : 'description')}</span>
+                    </div>
+                    <div class="file-info-text">
+                      <span class="file-title-name">${form.title}</span>
+                      <span class="file-meta-pill ${isLocal ? 'local-file' : 'online-form'}">
+                        ${form.badge || 'แบบฟอร์ม'} • ${isLocal ? 'ดาวน์โหลดไฟล์' : (form.url ? 'ดาวน์โหลด ORA' : 'เตรียมประกอบ')}
+                      </span>
+                    </div>
+                    <span class="material-icons file-action-icon">${isLocal ? 'download' : (form.url ? 'open_in_new' : 'description')}</span>
+                  </a>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <!-- 3. Steps -->
+          <div class="grant-sub-box">
+            <div class="grant-sub-header">
+              <span class="material-icons sub-header-icon">alt_route</span>
+              <h4>${dict.grant_tab_steps || 'ขั้นตอนการดำเนินการ'}</h4>
+            </div>
+            <div class="grant-steps-timeline">
+              ${grant.steps.map(stepObj => `
+                <div class="grant-timeline-step">
+                  <div class="step-num-node">${stepObj.step}</div>
+                  <div class="step-desc-text">${stepObj.desc}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- Grant Footer Actions -->
+        <div class="grant-card-footer">
+          <div class="grant-footer-left">
+            <a href="${grant.driveLink}" target="_blank" rel="noopener noreferrer" class="grant-action-link drive-link">
+              <span class="material-icons">folder</span>
+              <span>คลังเอกสารทุนนี้บน Google Drive</span>
+              <span class="material-icons">open_in_new</span>
+            </a>
+          </div>
+          <div class="grant-footer-right">
+            <a href="https://research.mis.cmu.ac.th/" target="_blank" rel="noopener noreferrer" class="grant-action-link cmu-link">
+              <span class="material-icons">launch</span>
+              <span>ระบบ CMU Research</span>
+            </a>
+            ${grant.oraLink ? `
+              <a href="${grant.oraLink}" target="_blank" rel="noopener noreferrer" class="grant-action-link ora-link">
+                <span class="material-icons">travel_explore</span>
+                <span>เว็บไซต์ สบว. มช. (ORA)</span>
+              </a>
+            ` : ''}
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+}
+
+/* ==========================================================================
+   4.2 NAVIGATION, TOAST & SMOOTH SCROLL MECHANICS
+   ========================================================================== */
+function initScrollAndNav() {
+  const mainHeader = document.getElementById('mainHeader');
+  const scrollTopBtn = document.getElementById('scrollTopBtn');
+  const headerAssistantBtn = document.getElementById('headerAssistantBtn');
+  const heroChatTrigger = document.getElementById('heroChatTrigger');
+
+  // Assistant triggers
+  const openChat = () => {
+    const assistantPanel = document.getElementById('assistantPanel');
+    const welcome = document.getElementById('assistantWelcomeScreen');
+    const chatBody = document.getElementById('assistantChatBody');
+    if (assistantPanel) {
+      assistantPanel.classList.add('active');
+      if (welcome && chatBody && welcome.style.display !== 'none') {
+        welcome.style.display = 'none';
+        chatBody.classList.add('active');
+        initChatBot();
+      }
+    }
+  };
+
+  if (headerAssistantBtn) headerAssistantBtn.addEventListener('click', openChat);
+  if (heroChatTrigger) heroChatTrigger.addEventListener('click', openChat);
+
+  // Scroll to top
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Window scroll handler
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+
+    // Header elevation
+    if (mainHeader) {
+      if (scrollY > 40) {
+        mainHeader.classList.add('scrolled');
+      } else {
+        mainHeader.classList.remove('scrolled');
+      }
+    }
+
+    // Scroll-to-top button visibility
+    if (scrollTopBtn) {
+      if (scrollY > 350) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    }
+
+    // Nav active link highlighting
+    const sections = ['heroSection', 'searchSection', 'internalGrantsSection', 'quickPortalSection', 'directContactSection'];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= 180 && rect.bottom >= 180) {
+          document.querySelectorAll('.header-nav-link').forEach(link => {
+            if (link.getAttribute('href') === `#${id}`) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      }
+    });
+  }, { passive: true });
+}
+
+function showToast(message, icon = 'check_circle') {
+  const toast = document.getElementById('toastNotification');
+  const toastMessage = document.getElementById('toastMessage');
+  const toastIcon = document.getElementById('toastIcon');
+
+  if (!toast || !toastMessage) return;
+
+  toastMessage.textContent = message;
+  if (toastIcon) toastIcon.textContent = icon;
+
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3200);
 }
 
 /* ==========================================================================
@@ -2172,10 +2544,11 @@ function renderStaff() {
       <div class="staff-position">${staff.position}</div>
       <p class="staff-role">${staff.role}</p>
       <div class="staff-contact-links">
-        <a href="tel:${staff.phone.replace(/[^0-9]/g, '')}" class="staff-link-item">
+        <a href="tel:${staff.phone.replace(/[^0-9]/g, '')}" class="staff-link-item" title="โทร: ${staff.phone}">
           <span class="material-icons">phone</span>
           <span>${staff.phone}</span>
         </a>
+        <a href="mailto:${staff.email}" class="staff-link-item" title="อีเมล: ${staff.email}">
           <span class="material-icons">mail</span>
           <span>${staff.email}</span>
         </a>

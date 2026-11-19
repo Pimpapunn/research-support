@@ -52,11 +52,27 @@
         </div>
       </div>
 
+      <!-- Desktop Navigation Menu -->
+      <nav class="header-nav-menu" aria-label="เมนูหลัก">
+        <a href="#heroSection" class="header-nav-link active">หน้าแรก</a>
+        <a href="#searchSection" class="header-nav-link">ขั้นตอนบริการ (12 บริการ)</a>
+        <a href="#internalGrantsSection" class="header-nav-link highlight-nav-link">ทุนวิจัยภายใน มช.</a>
+        <a href="#quickPortalSection" class="header-nav-link">ระบบที่เกี่ยวข้อง</a>
+        <a href="#directContactSection" class="header-nav-link">ติดต่อเจ้าหน้าที่</a>
+      </nav>
+
       <div class="nav-actions">
-        <div class="header-logos" style="display: flex; gap: 16px; align-items: center; margin-right: 16px;">
+        <div class="header-logos">
           <img src="data_research/SOC LOGO.png" alt="SOC Logo" class="header-logo-img soc-logo">
           <img src="data_research/CMU LOGO.png" alt="CMU Logo" class="header-logo-img cmu-logo">
         </div>
+
+        <!-- Quick AI Assistant Trigger in Header -->
+        <button class="header-assistant-btn" id="headerAssistantBtn" title="เปิดผู้ช่วยงานวิจัยอัจฉริยะ">
+          <span class="material-icons">support_agent</span>
+          <span class="btn-text">ผู้ช่วยวิจัย</span>
+        </button>
+
         <button class="theme-toggle" id="themeToggleBtn" aria-label="สลับโหมดหน้าจอ (มืด/สว่าง)"
           title="สลับโหมดหน้าจอ (มืด/สว่าง)">
           <span class="material-icons" id="themeIcon">dark_mode</span>
@@ -76,16 +92,80 @@
     <section class="hero-section" id="heroSection">
       <div class="hero-glow-1"></div>
       <div class="hero-glow-2"></div>
+      <div class="hero-glow-3"></div>
       <div class="container">
         <div class="badge-tag">
+          <span class="badge-pulse-dot" aria-hidden="true"></span>
           <span class="material-icons">verified</span>
           <span>ระบบสนับสนุนการปฏิบัติงานด้านวิจัยคณาจารย์และนักวิจัย</span>
         </div>
-        <h2><span>การดำเนินงานและกระบวนการขั้นตอนการบริหารงานวิจัยฯ</span></h2>
+        <h2 class="hero-title">
+          <span>การดำเนินงานและกระบวนการขั้นตอนการบริหารงานวิจัยฯ</span>
+        </h2>
         <p class="hero-subtitle">
           อธิบายและแนะนำขั้นตอนการดำเนินการอย่างเป็นระบบ ครอบคลุมขั้นตอนการยื่นเสนอโครงการ 
           สัญญารับทุน ขออนุมัติเปิดบัญชี เบิกจ่ายเงินงวด และการสนับสนุนงานด้านวิจัย คณะสังคมศาสตร์ มหาวิทยาลัยเชียงใหม่
         </p>
+
+        <!-- Hero Action CTAs -->
+        <div class="hero-actions">
+          <a href="#searchSection" class="btn-hero-primary" id="btnHeroExplore">
+            <span class="material-icons">explore</span>
+            <span>สำรวจขั้นตอนบริการ</span>
+            <span class="material-icons btn-arrow">arrow_downward</span>
+          </a>
+          <a href="#internalGrantsSection" class="btn-hero-grants" id="btnHeroGrants">
+            <span class="material-icons">monetization_on</span>
+            <span>ทุนวิจัยภายใน มช. (7 ทุน)</span>
+          </a>
+          <button class="btn-hero-secondary" id="heroChatTrigger">
+            <span class="material-icons">chat</span>
+            <span>ปรึกษาผู้ช่วยงานวิจัย</span>
+          </button>
+        </div>
+
+        <!-- Hero Stats Ribbon -->
+        <div class="hero-stats-ribbon">
+          <div class="hero-stat-card">
+            <div class="stat-icon-box">
+              <span class="material-icons">folder_special</span>
+            </div>
+            <div class="stat-info">
+              <div class="stat-number">12 ขั้นตอน</div>
+              <div class="stat-label">ครอบคลุมทุกกระบวนการวิจัย</div>
+            </div>
+          </div>
+
+          <div class="hero-stat-card">
+            <div class="stat-icon-box stat-icon-grants">
+              <span class="material-icons">savings</span>
+            </div>
+            <div class="stat-info">
+              <div class="stat-number">7 ทุนวิจัยภายใน</div>
+              <div class="stat-label">ทุนสนับสนุนตรงจาก มช.</div>
+            </div>
+          </div>
+
+          <div class="hero-stat-card">
+            <div class="stat-icon-box">
+              <span class="material-icons">auto_fix_high</span>
+            </div>
+            <div class="stat-info">
+              <div class="stat-number">ร่างเอกสารทันใจ</div>
+              <div class="stat-label">สร้างไฟล์ Word (.docx) ทันที</div>
+            </div>
+          </div>
+
+          <div class="hero-stat-card">
+            <div class="stat-icon-box">
+              <span class="material-icons">hub</span>
+            </div>
+            <div class="stat-info">
+              <div class="stat-number">เชื่อมโยง มช.</div>
+              <div class="stat-label">CMU Research / e-Doc / ICS</div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -94,16 +174,31 @@
          ========================================================================== -->
     <section class="search-hub-section" id="searchSection">
       <div class="container">
-        <!-- <div class="search-hub-wrapper">
+        <div class="search-hub-wrapper">
           <div class="search-box">
             <span class="material-icons search-icon">search</span>
             <input type="text" id="searchInput" placeholder="ค้นหาตามชื่องานวิจัย ขั้นตอน บริการ หรือแบบฟอร์ม..."
               aria-label="ค้นหาข้อมูลบริการ">
+            <span class="search-kbd-hint" title="กดแป้น / เพื่อค้นหา">/</span>
             <button class="clear-search" id="clearSearchBtn" aria-label="ล้างคำค้นหา" title="ล้างคำค้นหา">
               <span class="material-icons">close</span>
             </button>
           </div>
-        </div> -->
+
+          <!-- Quick Search Keywords Tags -->
+          <div class="search-quick-tags">
+            <span class="quick-tags-label">
+              <span class="material-icons">local_offer</span>
+              <span>คำค้นยอดนิยม:</span>
+            </span>
+            <button type="button" class="quick-tag-chip" data-search="เปิดบัญชี">เปิด-ปิดบัญชี</button>
+            <button type="button" class="quick-tag-chip" data-search="สัญญารับทุน">สัญญารับทุน</button>
+            <button type="button" class="quick-tag-chip" data-search="มอบอำนาจ">มอบอำนาจ</button>
+            <button type="button" class="quick-tag-chip" data-search="เบิกจ่าย">เบิกจ่ายเงินงวด</button>
+            <button type="button" class="quick-tag-chip" data-search="ค่าตีพิมพ์">ค่าตีพิมพ์ (APC)</button>
+            <button type="button" class="quick-tag-chip" data-search="CMU Research">CMU Research</button>
+          </div>
+        </div>
 
         <!-- Category Navigation Tabs -->
         <nav class="category-tabs" id="categoryTabs" aria-label="หมวดหมู่บริการงานวิจัย"></nav>
@@ -111,11 +206,61 @@
     </section>
 
     <!-- ==========================================================================
-         SERVICES GRID SECTION
+         SERVICES GRID SECTION (12 กระบวนงานบริการ)
          ========================================================================== -->
     <section class="services-section">
       <div class="container">
         <div class="services-grid" id="servicesGrid">
+          <!-- Dynamically Injected by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         INTERNAL RESEARCH GRANTS SECTION (ทุนวิจัยภายใน มช.)
+         ========================================================================== -->
+    <section class="internal-grants-section" id="internalGrantsSection">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header text-center">
+          <div class="badge-tag">
+            <span class="material-icons">savings</span>
+            <span id="internalGrantsBadgeText">ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่</span>
+          </div>
+          <h2 class="section-title-gradient" id="internalGrantsTitleText">ทุนวิจัยภายใน (ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่)</h2>
+          <p class="section-subtitle-text" id="internalGrantsDescText">
+            รวบรวมประกาศรับสมัคร เกณฑ์การจัดสรร แบบฟอร์มคำขอ และขั้นตอนการขอรับทุนสนับสนุนการวิจัยและผลงานวิชาการของมหาวิทยาลัยเชียงใหม่
+          </p>
+        </div>
+
+        <!-- Google Drive Hub Banner -->
+        <div class="gdrive-hero-banner glass-panel">
+          <div class="gdrive-banner-icon">
+            <svg viewBox="0 0 24 24" class="gdrive-svg-icon" aria-hidden="true">
+              <path fill="#4285F4" d="M6.98 1L0 12.5l3.52 6.09L10.5 7z" />
+              <path fill="#FBBC04" d="M17.02 1H6.98l3.52 6.09h10.02z" />
+              <path fill="#34A853" d="M20.5 18.59H3.52L0 12.5h7l3.5 6.09h3l3.5-6.09h7z" />
+            </svg>
+          </div>
+          <div class="gdrive-banner-content">
+            <h3 id="gdriveHubTitle">คลังเอกสารและแบบฟอร์มทุนวิจัยทั้งหมด (RAIS-SOCCMU บน Google Drive)</h3>
+            <p id="gdriveHubDesc">เข้าถึงเอกสาร ประกาศ และแบบฟอร์มขอรับทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่ทั้งหมดได้โดยตรงบน Google Drive พร้อมดาวน์โหลด</p>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1z5mBL4Oxap1ggsoK1C28kwDW_JAHopWC?usp=drive_link" 
+             target="_blank" rel="noopener noreferrer" class="btn-gdrive-portal" id="gdriveHubBtn">
+            <span class="material-icons">folder_open</span>
+            <span>เปิด Google Drive</span>
+            <span class="material-icons">open_in_new</span>
+          </a>
+        </div>
+
+        <!-- Grant Category Filter Tabs -->
+        <nav class="grants-category-tabs" id="grantCategoryTabs" aria-label="หมวดหมู่ทุนวิจัยภายใน มช.">
+          <!-- Dynamically Injected by JavaScript -->
+        </nav>
+
+        <!-- Grants Grid Container -->
+        <div class="internal-grants-grid" id="internalGrantsGrid">
           <!-- Dynamically Injected by JavaScript -->
         </div>
       </div>
@@ -556,6 +701,17 @@
       </div>
 
     </div>
+  </div>
+
+  <!-- Scroll to Top Floating Button -->
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="กลับสู่ด้านบน" title="กลับสู่ด้านบน">
+    <span class="material-icons">arrow_upward</span>
+  </button>
+
+  <!-- Global Toast Notification Container -->
+  <div class="toast-notification" id="toastNotification" role="alert" aria-live="polite">
+    <span class="material-icons toast-icon" id="toastIcon">check_circle</span>
+    <span class="toast-message" id="toastMessage">การดำเนินการเสร็จสิ้น</span>
   </div>
 
   <!-- Loading data first, then application controller -->
