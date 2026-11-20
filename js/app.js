@@ -766,7 +766,7 @@ function renderInternalGrants() {
 }
 
 /* ==========================================================================
-   4.2 GRANT SEARCH HUB LOGIC (grants.html)
+   4.2 GRANT SEARCH HUB LOGIC (funding.html)
    ========================================================================== */
 function initGrantSearch() {
   const grantSearchInput = document.getElementById('grantSearchInput');

@@ -10,7 +10,7 @@ const ALT_PORT = 3001;
 app.use(cors());
 app.use(express.json());
 
-// Serve all static files (index.html, grants.html, css/, js/, data_research/)
+// Serve all static files (index.html, funding.html, css/, js/, data_research/)
 app.use(express.static(__dirname));
 
 // Route handlers
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/grants', (req, res) => {
-    res.sendFile(path.join(__dirname, 'grants.html'));
+    res.sendFile(path.join(__dirname, 'funding.html'));
 });
 
 // Contact Form API
@@ -66,7 +66,7 @@ app.listen(PORT, () => {
     console.log(`===============================================`);
     console.log(` Web Server running at: http://localhost:${PORT}`);
     console.log(` - Main Page:   http://localhost:${PORT}/`);
-    console.log(` - Grants Page: http://localhost:${PORT}/grants.html`);
+    console.log(` - Grants Page: http://localhost:${PORT}/funding.html`);
     console.log(` - Contact API: http://localhost:${PORT}/api/contact`);
     console.log(`===============================================`);
 });
