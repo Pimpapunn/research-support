@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/grants', (req, res) => {
+app.get('/funding', (req, res) => {
     res.sendFile(path.join(__dirname, 'funding.html'));
 });
 
@@ -66,7 +66,7 @@ app.listen(PORT, () => {
     console.log(`===============================================`);
     console.log(` Web Server running at: http://localhost:${PORT}`);
     console.log(` - Main Page:   http://localhost:${PORT}/`);
-    console.log(` - Grants Page: http://localhost:${PORT}/funding.html`);
+    console.log(` - funding Page: http://localhost:${PORT}/funding.html`);
     console.log(` - Contact API: http://localhost:${PORT}/api/contact`);
     console.log(`===============================================`);
 });

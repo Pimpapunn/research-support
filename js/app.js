@@ -10,17 +10,17 @@
 let currentCategory = 'all';
 let currentGrantCategory = 'all';
 let searchQuery = '';
-let grantSearchQuery = '';
+let fundingearchQuery = '';
 let activeService = null;
 let activeModalTab = 'workflow';
 let chatHistory = [];
 let currentChatStep = 'start';
 let currentLang = localStorage.getItem('lang') || 'th';
 
-function getActiveGrantsData() {
+function getActivefundingData() {
   return currentLang === 'en' 
-    ? (typeof INTERNAL_GRANTS_DATA_EN !== 'undefined' ? INTERNAL_GRANTS_DATA_EN : INTERNAL_GRANTS_DATA)
-    : INTERNAL_GRANTS_DATA;
+    ? (typeof INTERNAL_funding_DATA_EN !== 'undefined' ? INTERNAL_funding_DATA_EN : INTERNAL_funding_DATA)
+    : INTERNAL_funding_DATA;
 }
 
 // รายการไฟล์ที่มีในโฟลเดอร์ data_research
@@ -52,10 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCategories();
   renderServices();
   renderGrantCategories();
-  renderInternalGrants();
+  renderInternalfunding();
   renderStaff();
   initSearch();
-  initGrantSearch();
+  initfundingearch();
   initModalEvents();
   initChatEvents();
   initContactForm();
@@ -264,13 +264,13 @@ function updateLanguageUI() {
   const btnTabGeneratorSpan = document.querySelector('#btnTabGenerator span:nth-child(2)');
   if (btnTabGeneratorSpan) btnTabGeneratorSpan.textContent = dict.tab_generator;
 
-  // Update Internal Grants Section localization
-  const internalGrantsBadge = document.getElementById('internalGrantsBadgeText');
-  if (internalGrantsBadge) internalGrantsBadge.textContent = dict.internal_grants_badge || 'ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่';
-  const internalGrantsTitle = document.getElementById('internalGrantsTitleText');
-  if (internalGrantsTitle) internalGrantsTitle.textContent = dict.internal_grants_title || 'ทุนวิจัยภายใน (ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่)';
-  const internalGrantsDesc = document.getElementById('internalGrantsDescText');
-  if (internalGrantsDesc) internalGrantsDesc.textContent = dict.internal_grants_desc || 'รวบรวมประกาศรับสมัคร เกณฑ์การจัดสรร แบบฟอร์มคำขอ และขั้นตอนการขอรับทุนสนับสนุนการวิจัยและผลงานวิชาการของมหาวิทยาลัยเชียงใหม่';
+  // Update Internal funding Section localization
+  const internalfundingBadge = document.getElementById('internalfundingBadgeText');
+  if (internalfundingBadge) internalfundingBadge.textContent = dict.internal_funding_badge || 'ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่';
+  const internalfundingTitle = document.getElementById('internalfundingTitleText');
+  if (internalfundingTitle) internalfundingTitle.textContent = dict.internal_funding_title || 'ทุนวิจัยภายใน (ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่)';
+  const internalfundingDesc = document.getElementById('internalfundingDescText');
+  if (internalfundingDesc) internalfundingDesc.textContent = dict.internal_funding_desc || 'รวบรวมประกาศรับสมัคร เกณฑ์การจัดสรร แบบฟอร์มคำขอ และขั้นตอนการขอรับทุนสนับสนุนการวิจัยและผลงานวิชาการของมหาวิทยาลัยเชียงใหม่';
 
   const gdriveHubTitle = document.getElementById('gdriveHubTitle');
   if (gdriveHubTitle) gdriveHubTitle.textContent = dict.gdrive_hub_title || 'คลังเอกสารและแบบฟอร์มทุนวิจัยทั้งหมด (RAIS-SOCCMU บน Google Drive)';
@@ -281,22 +281,22 @@ function updateLanguageUI() {
   if (navHome) navHome.textContent = dict.nav_home || 'หน้าแรก';
   const navProcesses = document.getElementById('navProcesses');
   if (navProcesses) navProcesses.textContent = dict.nav_processes || 'กระบวนการขั้นตอน การดำเนินโครงการวิจัย';
-  const navGrants = document.getElementById('navGrants');
-  if (navGrants) navGrants.textContent = dict.nav_internal_grants || 'ทุนวิจัยภายใน มช.';
+  const navfunding = document.getElementById('navfunding');
+  if (navfunding) navfunding.textContent = dict.nav_internal_funding || 'ทุนวิจัยภายใน มช.';
   const navRelated = document.getElementById('navRelated');
   if (navRelated) navRelated.textContent = dict.nav_related_systems || 'ระบบที่เกี่ยวข้อง';
   const navContact = document.getElementById('navContact');
   if (navContact) navContact.textContent = dict.nav_contact || 'ติดต่อเจ้าหน้าที่';
 
-  const grantSearchInput = document.getElementById('grantSearchInput');
-  if (grantSearchInput) grantSearchInput.placeholder = currentLang === 'en' ? 'Search internal grants, announcements, forms, or keywords...' : 'ค้นหาตามชื่อทุนวิจัย ประกาศ แบบฟอร์ม หรือคำสำคัญ...';
-  const clearGrantSearchBtn = document.getElementById('clearGrantSearchBtn');
-  if (clearGrantSearchBtn) clearGrantSearchBtn.title = dict.clear_search || 'ล้างคำค้นหา';
+  const fundingearchInput = document.getElementById('fundingearchInput');
+  if (fundingearchInput) fundingearchInput.placeholder = currentLang === 'en' ? 'Search internal funding, announcements, forms, or keywords...' : 'ค้นหาตามชื่อทุนวิจัย ประกาศ แบบฟอร์ม หรือคำสำคัญ...';
+  const clearfundingearchBtn = document.getElementById('clearfundingearchBtn');
+  if (clearfundingearchBtn) clearfundingearchBtn.title = dict.clear_search || 'ล้างคำค้นหา';
 
   renderCategories();
   renderServices();
   renderGrantCategories();
-  renderInternalGrants();
+  renderInternalfunding();
   renderStaff();
   
   const chatBody = document.getElementById('assistantChatBody');
@@ -563,19 +563,19 @@ function initSearch() {
 }
 
 /* ==========================================================================
-   4.1 INTERNAL GRANTS (ทุนวิจัยภายใน มช.) RENDERING
+   4.1 INTERNAL funding (ทุนวิจัยภายใน มช.) RENDERING
    ========================================================================== */
 function renderGrantCategories() {
   const container = document.getElementById('grantCategoryTabs');
   if (!container) return;
 
-  const data = getActiveGrantsData();
+  const data = getActivefundingData();
   if (!data || !data.categories) return;
 
-  const grants = data.grants;
+  const funding = data.funding;
   const getCount = (catId) => {
-    if (catId === 'all') return grants.length;
-    return grants.filter(g => g.category === catId).length;
+    if (catId === 'all') return funding.length;
+    return funding.filter(g => g.category === catId).length;
   };
 
   container.innerHTML = `
@@ -595,25 +595,25 @@ function renderGrantCategories() {
 
 function filterGrantCategory(catId) {
   currentGrantCategory = catId;
-  document.querySelectorAll('.grants-category-tabs .tab-btn').forEach(btn => {
+  document.querySelectorAll('.funding-category-tabs .tab-btn').forEach(btn => {
     btn.classList.remove('active');
   });
   const activeBtn = document.getElementById(`grant-tab-${catId}`);
   if (activeBtn) activeBtn.classList.add('active');
-  renderInternalGrants();
+  renderInternalfunding();
 }
 
-function renderInternalGrants() {
-  const grid = document.getElementById('internalGrantsGrid');
+function renderInternalfunding() {
+  const grid = document.getElementById('internalfundingGrid');
   if (!grid) return;
 
-  const data = getActiveGrantsData();
-  if (!data || !data.grants) return;
+  const data = getActivefundingData();
+  if (!data || !data.funding) return;
 
   const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.th;
-  const query = (typeof grantSearchQuery === 'string' ? grantSearchQuery : '').toLowerCase().trim();
+  const query = (typeof fundingearchQuery === 'string' ? fundingearchQuery : '').toLowerCase().trim();
 
-  const filteredGrants = data.grants.filter(grant => {
+  const filteredfunding = data.funding.filter(grant => {
     const matchesCategory = (query.length > 0)
       ? true
       : (currentGrantCategory === 'all' || grant.category === currentGrantCategory);
@@ -629,7 +629,7 @@ function renderInternalGrants() {
     return matchesCategory && matchesSearch;
   });
 
-  if (filteredGrants.length === 0) {
+  if (filteredfunding.length === 0) {
     grid.innerHTML = `
       <div class="empty-results glass-panel">
         <span class="material-icons">search_off</span>
@@ -640,7 +640,7 @@ function renderInternalGrants() {
     return;
   }
 
-  grid.innerHTML = filteredGrants.map(grant => {
+  grid.innerHTML = filteredfunding.map(grant => {
     const isConference = grant.id === 'grant-3';
     return `
       <article class="grant-card glass-panel" id="${grant.id}">
@@ -768,51 +768,51 @@ function renderInternalGrants() {
 /* ==========================================================================
    4.2 GRANT SEARCH HUB LOGIC (funding.html)
    ========================================================================== */
-function initGrantSearch() {
-  const grantSearchInput = document.getElementById('grantSearchInput');
-  const clearGrantSearchBtn = document.getElementById('clearGrantSearchBtn');
+function initfundingearch() {
+  const fundingearchInput = document.getElementById('fundingearchInput');
+  const clearfundingearchBtn = document.getElementById('clearfundingearchBtn');
 
-  if (grantSearchInput) {
-    grantSearchInput.addEventListener('input', (e) => {
-      grantSearchQuery = e.target.value;
+  if (fundingearchInput) {
+    fundingearchInput.addEventListener('input', (e) => {
+      fundingearchQuery = e.target.value;
 
-      if (grantSearchQuery.trim().length > 0) {
-        if (clearGrantSearchBtn) clearGrantSearchBtn.style.display = 'flex';
+      if (fundingearchQuery.trim().length > 0) {
+        if (clearfundingearchBtn) clearfundingearchBtn.style.display = 'flex';
         if (currentGrantCategory !== 'all') {
           currentGrantCategory = 'all';
-          document.querySelectorAll('.grants-category-tabs .tab-btn').forEach(btn => {
+          document.querySelectorAll('.funding-category-tabs .tab-btn').forEach(btn => {
             btn.classList.toggle('active', btn.id === 'grant-tab-all');
           });
         }
       } else {
-        if (clearGrantSearchBtn) clearGrantSearchBtn.style.display = 'none';
+        if (clearfundingearchBtn) clearfundingearchBtn.style.display = 'none';
       }
 
-      renderInternalGrants();
+      renderInternalfunding();
     });
 
-    if (clearGrantSearchBtn) {
-      clearGrantSearchBtn.addEventListener('click', () => {
-        grantSearchInput.value = '';
-        grantSearchQuery = '';
-        clearGrantSearchBtn.style.display = 'none';
-        grantSearchInput.focus();
-        renderInternalGrants();
+    if (clearfundingearchBtn) {
+      clearfundingearchBtn.addEventListener('click', () => {
+        fundingearchInput.value = '';
+        fundingearchQuery = '';
+        clearfundingearchBtn.style.display = 'none';
+        fundingearchInput.focus();
+        renderInternalfunding();
       });
     }
 
     // Keyboard shortcut "/" for grant search
     window.addEventListener('keydown', (e) => {
-      if (e.key === '/' && document.activeElement !== grantSearchInput && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+      if (e.key === '/' && document.activeElement !== fundingearchInput && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
         e.preventDefault();
-        grantSearchInput.focus();
-        grantSearchInput.select();
-      } else if (e.key === 'Escape' && document.activeElement === grantSearchInput) {
-        grantSearchInput.value = '';
-        grantSearchQuery = '';
-        if (clearGrantSearchBtn) clearGrantSearchBtn.style.display = 'none';
-        grantSearchInput.blur();
-        renderInternalGrants();
+        fundingearchInput.focus();
+        fundingearchInput.select();
+      } else if (e.key === 'Escape' && document.activeElement === fundingearchInput) {
+        fundingearchInput.value = '';
+        fundingearchQuery = '';
+        if (clearfundingearchBtn) clearfundingearchBtn.style.display = 'none';
+        fundingearchInput.blur();
+        renderInternalfunding();
       }
     });
   }
@@ -821,20 +821,20 @@ function initGrantSearch() {
   document.querySelectorAll('.grant-quick-tag-chip').forEach(chip => {
     chip.addEventListener('click', () => {
       const term = chip.getAttribute('data-grant-search') || chip.textContent.trim();
-      if (grantSearchInput) {
-        grantSearchInput.value = term;
-        grantSearchQuery = term;
-        if (clearGrantSearchBtn) clearGrantSearchBtn.style.display = 'flex';
+      if (fundingearchInput) {
+        fundingearchInput.value = term;
+        fundingearchQuery = term;
+        if (clearfundingearchBtn) clearfundingearchBtn.style.display = 'flex';
         if (currentGrantCategory !== 'all') {
           currentGrantCategory = 'all';
-          document.querySelectorAll('.grants-category-tabs .tab-btn').forEach(b => {
+          document.querySelectorAll('.funding-category-tabs .tab-btn').forEach(b => {
             b.classList.toggle('active', b.id === 'grant-tab-all');
           });
         }
-        renderInternalGrants();
-        const grantsGrid = document.getElementById('internalGrantsGrid');
-        if (grantsGrid) {
-          grantsGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        renderInternalfunding();
+        const fundingGrid = document.getElementById('internalfundingGrid');
+        if (fundingGrid) {
+          fundingGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
     });
@@ -898,7 +898,7 @@ function initScrollAndNav() {
     }
 
     // Nav active link highlighting
-    const sections = ['heroSection', 'searchSection', 'internalGrantsSection', 'quickPortalSection', 'directContactSection'];
+    const sections = ['heroSection', 'searchSection', 'internalfundingSection', 'quickPortalSection', 'directContactSection'];
     sections.forEach(id => {
       const el = document.getElementById(id);
       if (el) {

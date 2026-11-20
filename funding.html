@@ -41,7 +41,7 @@
       <nav class="header-nav-menu" aria-label="เมนูหลัก">
         <a href="index.html" class="header-nav-link" id="navHome">หน้าแรก</a>
         <a href="index.html#searchSection" class="header-nav-link" id="navProcesses">← กระบวนการขั้นตอนการดำเนินโครงการวิจัย</a>
-        <a href="funding.html" class="header-nav-link highlight-nav-link active" id="navGrants">ทุนวิจัยภายใน มช. (7 ทุน)</a>
+        <a href="funding.html" class="header-nav-link highlight-nav-link active" id="navfunding">ทุนวิจัยภายใน มช. (7 ทุน)</a>
         <a href="index.html#quickPortalSection" class="header-nav-link" id="navRelated">ระบบที่เกี่ยวข้อง</a>
         <a href="index.html#directContactSection" class="header-nav-link" id="navContact">ติดต่อเจ้าหน้าที่</a>
       </nav>
@@ -66,7 +66,7 @@
 
   <main>
     <!-- ==========================================================================
-         HERO BANNER - INTERNAL GRANTS
+         HERO BANNER - INTERNAL funding
          ========================================================================== -->
     <section class="hero-section" id="heroSection">
       <div class="hero-glow-1"></div>
@@ -76,25 +76,25 @@
         <div class="badge-tag">
           <span class="badge-pulse-dot" aria-hidden="true"></span>
           <span class="material-icons">savings</span>
-          <span id="internalGrantsBadgeText">ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่ ประจำปี 2569 / ต่อเนื่อง</span>
+          <span id="internalfundingBadgeText">ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่ ประจำปี 2569 / ต่อเนื่อง</span>
         </div>
-        <h2 class="hero-title" id="internalGrantsHeroTitle">
+        <h2 class="hero-title" id="internalfundingHeroTitle">
           <span>ทุนวิจัยภายใน </span><span class="accent-text">มหาวิทยาลัยเชียงใหม่</span>
         </h2>
-        <p class="hero-subtitle" id="internalGrantsHeroDesc">
+        <p class="hero-subtitle" id="internalfundingHeroDesc">
           รวบรวมประกาศรับสมัคร เกณฑ์การจัดสรร แบบฟอร์มคำขอ และขั้นตอนการขอรับทุนสนับสนุนการวิจัยและผลงานทางวิชาการ
           ทั้ง 7 ประเภท สำหรับคณาจารย์และนักวิจัย คณะสังคมศาสตร์ มหาวิทยาลัยเชียงใหม่
         </p>
 
         <!-- Hero Actions -->
         <div class="hero-actions">
-          <a href="#grantSearchSection" class="btn-hero-primary" id="btnHeroExplore">
+          <a href="#fundingearchSection" class="btn-hero-primary" id="btnHeroExplore">
             <span class="material-icons">search</span>
             <span>ค้นหาและเลือกดูทุนวิจัย</span>
             <span class="material-icons btn-arrow">arrow_downward</span>
           </a>
           <a href="https://drive.google.com/drive/folders/1z5mBL4Oxap1ggsoK1C28kwDW_JAHopWC?usp=drive_link"
-            target="_blank" rel="noopener noreferrer" class="btn-hero-grants" id="btnHeroDrive">
+            target="_blank" rel="noopener noreferrer" class="btn-hero-funding" id="btnHeroDrive">
             <span class="material-icons">folder_open</span>
             <span>คลังเอกสาร Google Drive</span>
             <span class="material-icons">open_in_new</span>
@@ -178,15 +178,15 @@
     <!-- ==========================================================================
          GRANT SEARCH AND CATEGORY FILTER HUB
          ========================================================================== -->
-    <section class="search-hub-section" id="grantSearchSection">
+    <section class="search-hub-section" id="fundingearchSection">
       <div class="container">
         <div class="search-hub-wrapper">
           <div class="search-box">
             <span class="material-icons search-icon">search</span>
-            <input type="text" id="grantSearchInput" placeholder="ค้นหาตามชื่อทุนวิจัย ประกาศ แบบฟอร์ม หรือคำสำคัญ..."
+            <input type="text" id="fundingearchInput" placeholder="ค้นหาตามชื่อทุนวิจัย ประกาศ แบบฟอร์ม หรือคำสำคัญ..."
               aria-label="ค้นหาข้อมูลทุนวิจัยภายใน มช.">
             <span class="search-kbd-hint" title="กดแป้น / เพื่อค้นหา">/</span>
-            <button class="clear-search" id="clearGrantSearchBtn" aria-label="ล้างคำค้นหา" title="ล้างคำค้นหา">
+            <button class="clear-search" id="clearfundingearchBtn" aria-label="ล้างคำค้นหา" title="ล้างคำค้นหา">
               <span class="material-icons">close</span>
             </button>
           </div>
@@ -208,18 +208,18 @@
         </div>
 
         <!-- Grant Category Filter Tabs -->
-        <nav class="grants-category-tabs" id="grantCategoryTabs" aria-label="หมวดหมู่ทุนวิจัยภายใน มช.">
+        <nav class="funding-category-tabs" id="grantCategoryTabs" aria-label="หมวดหมู่ทุนวิจัยภายใน มช.">
           <!-- Dynamically Injected by JavaScript -->
         </nav>
       </div>
     </section>
 
     <!-- ==========================================================================
-         INTERNAL GRANTS CARDS GRID (7 ทุนสนับสนุน)
+         INTERNAL funding CARDS GRID (7 ทุนสนับสนุน)
          ========================================================================== -->
-    <section class="internal-grants-section" style="padding-top: 10px; padding-bottom: 70px;">
+    <section class="internal-funding-section" style="padding-top: 10px; padding-bottom: 70px;">
       <div class="container">
-        <div class="internal-grants-grid" id="internalGrantsGrid">
+        <div class="internal-funding-grid" id="internalfundingGrid">
           <!-- Dynamically Injected by JavaScript -->
         </div>
       </div>
@@ -229,8 +229,8 @@
          BACK TO 12 SERVICES CALLOUT
          ========================================================================== -->
     <section class="container" style="padding-bottom: 60px;">
-      <div class="grants-promo-banner glass-panel">
-        <div class="grants-promo-content">
+      <div class="funding-promo-banner glass-panel">
+        <div class="funding-promo-content">
           <div class="badge-tag">
             <span class="material-icons">account_tree</span>
             <span>คู่มือกระบวนการงานวิจัย คณะสังคมศาสตร์</span>

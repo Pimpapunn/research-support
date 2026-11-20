@@ -3230,7 +3230,7 @@ body.dark-mode .btn-submit-premium {
 }
 
 /* ==========================================================================
-   MODERN UI UPGRADES & INTERNAL GRANTS STYLING (2026 EDITION)
+   MODERN UI UPGRADES & INTERNAL funding STYLING (2026 EDITION)
    ========================================================================== */
 
 /* 1. Header Navigation Menu & Actions */
@@ -3424,7 +3424,7 @@ body.dark-mode .main-header.scrolled {
   transform: translateY(3px);
 }
 
-.btn-hero-grants {
+.btn-hero-funding {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -3441,12 +3441,12 @@ body.dark-mode .main-header.scrolled {
   transition: var(--transition-smooth);
 }
 
-body.dark-mode .btn-hero-grants {
+body.dark-mode .btn-hero-funding {
   color: hsl(var(--accent-hue), 85%, 72%);
   border-color: hsla(var(--accent-hue), 70%, 55%, 0.4);
 }
 
-.btn-hero-grants:hover {
+.btn-hero-funding:hover {
   background: linear-gradient(135deg, var(--accent) 0%, hsl(var(--primary-hue), 85%, 40%) 100%);
   color: #ffffff;
   border-color: transparent;
@@ -3520,7 +3520,7 @@ body.dark-mode .btn-hero-grants {
   flex-shrink: 0;
 }
 
-.stat-icon-box.stat-icon-grants {
+.stat-icon-box.stat-icon-funding {
   background: var(--accent-light);
   color: var(--accent);
 }
@@ -3719,9 +3719,9 @@ body.dark-mode .card-feature-pill.template-pill {
 }
 
 /* ==========================================================================
-   4. INTERNAL RESEARCH GRANTS SECTION (ทุนวิจัยภายใน มช.)
+   4. INTERNAL RESEARCH funding SECTION (ทุนวิจัยภายใน มช.)
    ========================================================================== */
-.internal-grants-section {
+.internal-funding-section {
   padding: 60px 0 80px 0;
   position: relative;
 }
@@ -3849,12 +3849,12 @@ body.dark-mode .gdrive-banner-icon {
 }
 
 /* Grant Category Tabs */
-.grants-category-tabs {
+.funding-category-tabs {
   margin-bottom: 32px;
 }
 
-/* Grants Grid Layout */
-.internal-grants-grid {
+/* funding Grid Layout */
+.internal-funding-grid {
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -4311,7 +4311,7 @@ body.dark-mode .grant-action-link.ora-link {
   font-size: 20px;
 }
 
-/* 7. Responsive adjustments for Grants and UI */
+/* 7. Responsive adjustments for funding and UI */
 @media (max-width: 1100px) {
   .hero-stats-ribbon {
     grid-template-columns: repeat(2, 1fr);
@@ -4367,7 +4367,7 @@ body.dark-mode .grant-action-link.ora-link {
   }
 
   .btn-hero-primary,
-  .btn-hero-grants,
+  .btn-hero-funding,
   .btn-hero-secondary {
     width: 100%;
     justify-content: center;
@@ -4384,13 +4384,13 @@ body.dark-mode .grant-action-link.ora-link {
 }
 
 /* ==========================================================================
-   GRANTS PROMO BANNER (index.html) & GRANTS PAGE STYLING (funding.html)
+   funding PROMO BANNER (index.html) & funding PAGE STYLING (funding.html)
    ========================================================================== */
-.grants-promo-section {
+.funding-promo-section {
   padding: 40px 0 60px 0;
 }
 
-.grants-promo-banner {
+.funding-promo-banner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -4404,12 +4404,12 @@ body.dark-mode .grant-action-link.ora-link {
   overflow: hidden;
 }
 
-body.dark-mode .grants-promo-banner {
+body.dark-mode .funding-promo-banner {
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(99, 102, 241, 0.12) 100%);
   border-color: rgba(255, 255, 255, 0.1);
 }
 
-.grants-promo-banner::before {
+.funding-promo-banner::before {
   content: '';
   position: absolute;
   top: -60px;
@@ -4421,11 +4421,11 @@ body.dark-mode .grants-promo-banner {
   pointer-events: none;
 }
 
-.grants-promo-content {
+.funding-promo-content {
   flex: 1;
 }
 
-.grants-promo-content h2 {
+.funding-promo-content h2 {
   font-size: 24px;
   font-weight: 700;
   margin: 12px 0 8px 0;
@@ -4433,7 +4433,7 @@ body.dark-mode .grants-promo-banner {
   letter-spacing: -0.3px;
 }
 
-.grants-promo-content p {
+.funding-promo-content p {
   font-size: 14.5px;
   line-height: 1.6;
   color: var(--text-secondary);
@@ -4485,7 +4485,7 @@ body.dark-mode .grants-promo-banner {
 }
 
 @media (max-width: 900px) {
-  .grants-promo-banner {
+  .funding-promo-banner {
     flex-direction: column;
     align-items: flex-start;
     padding: 28px 24px;

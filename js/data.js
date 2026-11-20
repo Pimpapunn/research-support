@@ -623,7 +623,7 @@ const RESEARCH_DATA = {
     },
     {
       name: "นายธิติพงศ์ บุญตัน",
-      position: "นักบริหารงานย",
+      position: "นักบริหารงานวิจัย",
       role: "ดูแลสนับสนุนการจัดทำข้อเสนอและติดตามโครงการวิจัย ติดตามประเมินผลและวิเคราะห์ข้อมูลเชิงวิจัย วิเคราะห์และพัฒนายุทธศาสตร์งานวิจัยของคณะ",
       desc: "ดูแลสนับสนุนการจัดทำข้อเสนอและติดตามโครงการวิจัย ติดตามประเมินผลและวิเคราะห์ข้อมูลเชิงวิจัย วิเคราะห์และพัฒนายุทธศาสตร์งานวิจัยของคณะ",
       phone: "053-943528",
@@ -636,7 +636,7 @@ const RESEARCH_DATA = {
  * ข้อมูลทุนวิจัยภายใน (ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่)
  * แยกเป็นเมนูและส่วนงานเฉพาะ ไม่รวมเป็นบริการ 12 บริการ
  */
-const INTERNAL_GRANTS_DATA = {
+const INTERNAL_funding_DATA = {
   categories: [
     { id: 'all', title: 'ทุนทั้งหมด (7 ทุน)', icon: 'apps' },
     { id: 'incentive', title: '1. ค่าตอบแทน & ค่าตีพิมพ์', icon: 'payments' },
@@ -644,7 +644,7 @@ const INTERNAL_GRANTS_DATA = {
     { id: 'collaborative', title: '3. ทุนวิจัยร่วม & นักวิจัยต่างชาติ', icon: 'handshake' },
     { id: 'career', title: '4. พัฒนานักวิจัยรุ่นใหม่-กลาง', icon: 'trending_up' }
   ],
-  grants: [
+  funding: [
     {
       id: 'grant-1',
       number: '1',
@@ -1001,5 +1001,5 @@ const INTERNAL_GRANTS_DATA = {
 
 // นำออกจากไฟล์เพื่อให้ใช้ได้กับสคริปต์
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { RESEARCH_DATA, INTERNAL_GRANTS_DATA };
+  module.exports = { RESEARCH_DATA, INTERNAL_funding_DATA };
 }

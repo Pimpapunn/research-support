@@ -5,7 +5,7 @@ const TRANSLATIONS = {
     portal_subtitle: "คณะสังคมศาสตร์ มหาวิทยาลัยเชียงใหม่",
     nav_home: "หน้าแรก",
     nav_processes: "กระบวนการขั้นตอน การดำเนินโครงการวิจัย",
-    nav_internal_grants: "ทุนวิจัยภายใน มช.",
+    nav_internal_funding: "ทุนวิจัยภายใน มช.",
     nav_related_systems: "ระบบที่เกี่ยวข้อง",
     nav_contact: "ติดต่อเจ้าหน้าที่",
     // hero_tag: "ระบบสนับสนุนการปฏิบัติงานด้านวิจัยคณาจารย์และนักวิจัย",
@@ -40,11 +40,11 @@ const TRANSLATIONS = {
     gdrive_title: "คลังเอกสารงานวิจัย",
     gdrive_desc: "แบบฟอร์ม คู่มือ และเอกสารอ้างอิงทั้งหมดสำหรับการบริหารงานวิจัย จัดเก็บบน Google Drive พร้อมดาวน์โหลด",
 
-    // Internal Grants (ทุนวิจัยภายใน มช.)
-    nav_internal_grants: "ทุนวิจัยภายใน มช.",
-    internal_grants_badge: "ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่",
-    internal_grants_title: "ทุนวิจัยภายใน มหาวิทยาลัยเชียงใหม่",
-    internal_grants_desc: "รวบรวมประกาศ เกณฑ์การจัดสรร แบบฟอร์มคำขอ และขั้นตอนการขอรับทุนสนับสนุนการวิจัยและผลงานวิชาการของมหาวิทยาลัยเชียงใหม่ ครบทั้ง 7 ด้าน",
+    // Internal funding (ทุนวิจัยภายใน มช.)
+    nav_internal_funding: "ทุนวิจัยภายใน มช.",
+    internal_funding_badge: "ทุนสนับสนุนจากมหาวิทยาลัยเชียงใหม่",
+    internal_funding_title: "ทุนวิจัยภายใน มหาวิทยาลัยเชียงใหม่",
+    internal_funding_desc: "รวบรวมประกาศ เกณฑ์การจัดสรร แบบฟอร์มคำขอ และขั้นตอนการขอรับทุนสนับสนุนการวิจัยและผลงานวิชาการของมหาวิทยาลัยเชียงใหม่ ครบทั้ง 7 ด้าน",
     gdrive_hub_title: "คลังเอกสารและแบบฟอร์มทุนวิจัยทั้งหมด (RAIS-SOCCMU บน Google Drive)",
     gdrive_hub_desc: "ดาวน์โหลดประกาศฉบับเต็ม แบบฟอร์มขอรับทุน และเอกสารแนบทุกหมวดหมู่ จัดเก็บเป็นระบบบน Google Drive คณะสังคมศาสตร์ มช.",
     gdrive_hub_btn: "เปิดโฟลเดอร์ Google Drive ↗",
@@ -117,7 +117,7 @@ const TRANSLATIONS = {
     portal_subtitle: "Faculty of Social Sciences, Chiang Mai University",
     nav_home: "Home",
     nav_processes: "Research Project Processes & Procedures",
-    nav_internal_grants: "CMU Internal Grants",
+    nav_internal_funding: "CMU Internal funding",
     nav_related_systems: "Related Systems",
     nav_contact: "Contact Staff",
     hero_tag: "Research Operations Support System for Faculty and Researchers",
@@ -144,7 +144,7 @@ const TRANSLATIONS = {
     related_systems_desc_th: "รวมระบบสารสนเทศที่ใช้สนับสนุนการปฏิบัติงานวิจัยและการดำเนินงานต่างๆ",
     related_systems_desc_en: "A collection of information systems that support research administration and project management.",
     cmu_research_title: "CMU Research System",
-    cmu_research_desc: "Chiang Mai University Research Administration and Database System for managing researcher data, grants, and publications.",
+    cmu_research_desc: "Chiang Mai University Research Administration and Database System for managing researcher data, funding, and publications.",
     edoc_title: "e-Document System",
     edoc_desc: "Chiang Mai University electronic document system for receiving and sending official documents.",
     eresearch_title: "e-Research Faculty of Social Sciences",
@@ -152,12 +152,12 @@ const TRANSLATIONS = {
     gdrive_title: "Research Document Archive",
     gdrive_desc: "All forms, manuals, and reference documents for research administration stored on Google Drive.",
 
-    // Internal Grants (ทุนวิจัยภายใน มช.)
-    nav_internal_grants: "CMU Internal Grants",
-    internal_grants_badge: "Chiang Mai University Funding Schemes",
-    internal_grants_title: "CMU Internal Research Grants",
-    internal_grants_desc: "Comprehensive guidelines, official announcements, application forms, and procedures for Chiang Mai University research grants and academic awards across 7 funding schemes.",
-    gdrive_hub_title: "Research Grants Archive & Documents (RAIS-SOCCMU on Google Drive)",
+    // Internal funding (ทุนวิจัยภายใน มช.)
+    nav_internal_funding: "CMU Internal funding",
+    internal_funding_badge: "Chiang Mai University Funding Schemes",
+    internal_funding_title: "CMU Internal Research funding",
+    internal_funding_desc: "Comprehensive guidelines, official announcements, application forms, and procedures for Chiang Mai University research funding and academic awards across 7 funding schemes.",
+    gdrive_hub_title: "Research funding Archive & Documents (RAIS-SOCCMU on Google Drive)",
     gdrive_hub_desc: "Download official announcements, grant application forms, and appendices organized in Google Drive.",
     gdrive_hub_btn: "Open Google Drive Folder ↗",
     grant_tab_announcements: "Announcements & Regulations",
@@ -242,7 +242,7 @@ const RESEARCH_DATA_EN = {
       shortTitle: 'Proposal Submission',
       category: 'initiation',
       icon: 'post_add',
-      summary: 'Submission of project proposals to request research grants from both CMU internal sources and external funding agencies.',
+      summary: 'Submission of project proposals to request research funding from both CMU internal sources and external funding agencies.',
       objective: 'To properly submit research proposals according to university and faculty research guidelines.',
       researcherSteps: [
         { step: 1, desc: 'Study the research project operations guidelines in document "4.1 Project Operations (PI)".' },
@@ -490,7 +490,7 @@ const RESEARCH_DATA_EN = {
       shortTitle: 'Outer-Source Installment Claims',
       category: 'finance',
       icon: 'account_balance',
-      summary: 'Procedures for requesting installment disbursements from external grants, including database updates and routing claim requests through Faculty Finance.',
+      summary: 'Procedures for requesting installment disbursements from external funding, including database updates and routing claim requests through Faculty Finance.',
       objective: 'To request approval for drawing research budget installments from external sponsors.',
       researcherSteps: [
         { step: 1, desc: 'Verify fund transfer status and execute the current phase deliverables.' },
@@ -548,7 +548,7 @@ const RESEARCH_DATA_EN = {
       systems: [
         { name: 'Faculty Finance System', url: '#', usage: 'Record and process institutional overhead deduction.' }
       ],
-      tips: 'The standard overhead contribution is 10% for general academic grants, but may vary by funding contract.',
+      tips: 'The standard overhead contribution is 10% for general academic funding, but may vary by funding contract.',
       hasTemplate: true,
       templateType: 'contribution_memo',
       templateFields: [
@@ -776,17 +776,17 @@ const CHAT_FLOW_EN = {
 };
 
 /**
- * English version of CMU Internal Research Grants dataset
+ * English version of CMU Internal Research funding dataset
  */
-const INTERNAL_GRANTS_DATA_EN = {
+const INTERNAL_funding_DATA_EN = {
   categories: [
-    { id: 'all', title: 'All Grants (7)', icon: 'apps' },
+    { id: 'all', title: 'All funding (7)', icon: 'apps' },
     { id: 'incentive', title: '1. Incentives & APC', icon: 'payments' },
     { id: 'conference', title: '2. International Conference', icon: 'flight_takeoff' },
     { id: 'collaborative', title: '3. Collaborative & Visiting', icon: 'handshake' },
     { id: 'career', title: '4. Early & Mid-Career', icon: 'trending_up' }
   ],
-  grants: [
+  funding: [
     {
       id: 'grant-1',
       number: '1',
@@ -934,7 +934,7 @@ const INTERNAL_GRANTS_DATA_EN = {
         { step: 1, desc: 'Prepare Application Form, Budget Excel Appendix, and Official Acceptance Letter.' },
         { step: 2, desc: 'Submit online grant application via the CMU Research system.' },
         { step: 3, desc: 'Forward formal memo via Department through CMU e-Document to ORA AT LEAST 80 WORKING DAYS PRIOR TO TRAVEL (Strict Rule).' },
-        { step: 4, desc: 'ORA CMU reviews submissions in monthly cycles and announces approved grants.' },
+        { step: 4, desc: 'ORA CMU reviews submissions in monthly cycles and announces approved funding.' },
         { step: 5, desc: 'Upon return, submit attendance report and expense reimbursement documentation.' }
       ],
       driveLink: 'https://drive.google.com/drive/folders/1z5mBL4Oxap1ggsoK1C28kwDW_JAHopWC?usp=drive_link',
@@ -944,7 +944,7 @@ const INTERNAL_GRANTS_DATA_EN = {
       id: 'grant-4',
       number: '4',
       category: 'collaborative',
-      title: 'Matching Fund for External Research Grants',
+      title: 'Matching Fund for External Research funding',
       icon: 'handshake',
       badgeColor: 'amber',
       summary: 'CMU counterpart matching fund supporting research projects that receive primary research funding from external public, private, or industrial partners (Grant Code: MF).',
@@ -1142,5 +1142,5 @@ const INTERNAL_GRANTS_DATA_EN = {
 };
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { TRANSLATIONS, RESEARCH_DATA_EN, CHAT_FLOW_EN, INTERNAL_GRANTS_DATA_EN };
+  module.exports = { TRANSLATIONS, RESEARCH_DATA_EN, CHAT_FLOW_EN, INTERNAL_funding_DATA_EN };
 }
