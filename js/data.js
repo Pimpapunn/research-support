@@ -638,7 +638,7 @@ const RESEARCH_DATA = {
  */
 const INTERNAL_funding_DATA = {
   categories: [
-    { id: 'all', title: 'ทุนทั้งหมด (7 ทุน)', icon: 'apps' },
+    { id: 'all', title: 'ทุนทั้งหมด', icon: 'apps' },
     { id: 'incentive', title: '1. ค่าตอบแทน & ค่าตีพิมพ์', icon: 'payments' },
     { id: 'conference', title: '2. ทุนเสนอผลงานต่างประเทศ', icon: 'flight_takeoff' },
     { id: 'collaborative', title: '3. ทุนวิจัยร่วม & นักวิจัยต่างชาติ', icon: 'handshake' },
