@@ -75,9 +75,48 @@
           title="Switch Language (TH/EN)">
           <span id="langText">EN</span>
         </button>
+        <!-- Hamburger menu (mobile only) -->
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="เปิดเมนู" aria-expanded="false">
+          <span class="material-icons">menu</span>
+        </button>
       </div>
     </div>
   </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer" role="dialog" aria-modal="true" aria-label="เมนูนำทาง">
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+    <div class="mobile-nav-panel" id="mobileNavPanel">
+      <div class="mobile-nav-header">
+        <span class="mobile-nav-title">เมนูนำทาง</span>
+        <button class="mobile-nav-close" id="mobileNavClose" aria-label="ปิดเมนู">
+          <span class="material-icons">close</span>
+        </button>
+      </div>
+      <nav class="mobile-nav-links">
+        <a href="#heroSection" class="mobile-nav-link active">
+          <span class="material-icons">home</span>
+          <span>หน้าแรก</span>
+        </a>
+        <a href="#searchSection" class="mobile-nav-link">
+          <span class="material-icons">account_tree</span>
+          <span>กระบวนการขั้นตอน</span>
+        </a>
+        <a href="funding.html" class="mobile-nav-link highlight">
+          <span class="material-icons">monetization_on</span>
+          <span>ทุนวิจัยภายใน มช.</span>
+        </a>
+        <a href="#quickPortalSection" class="mobile-nav-link">
+          <span class="material-icons">hub</span>
+          <span>ระบบที่เกี่ยวข้อง</span>
+        </a>
+        <a href="#directContactSection" class="mobile-nav-link">
+          <span class="material-icons">contact_support</span>
+          <span>ติดต่อเจ้าหน้าที่</span>
+        </a>
+      </nav>
+    </div>
+  </div>
 
   <main>
     <!-- ==========================================================================

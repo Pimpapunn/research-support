@@ -60,7 +60,54 @@ document.addEventListener('DOMContentLoaded', () => {
   initChatEvents();
   initContactForm();
   initScrollAndNav();
+  initMobileNav();
 });
+
+/* ==========================================================================
+   MOBILE NAVIGATION DRAWER
+   ========================================================================== */
+function initMobileNav() {
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+  const mobileNavPanel = document.getElementById('mobileNavPanel');
+  const mobileNavClose = document.getElementById('mobileNavClose');
+  const mobileNavBackdrop = document.getElementById('mobileNavBackdrop');
+
+  if (!hamburgerBtn || !mobileNavDrawer) return;
+
+  function openNav() {
+    mobileNavDrawer.classList.add('open');
+    mobileNavPanel.classList.add('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeNav() {
+    mobileNavDrawer.classList.remove('open');
+    mobileNavPanel.classList.remove('open');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  hamburgerBtn.addEventListener('click', openNav);
+  mobileNavClose && mobileNavClose.addEventListener('click', closeNav);
+  mobileNavBackdrop && mobileNavBackdrop.addEventListener('click', closeNav);
+
+  // Close drawer when any nav link is clicked
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeNav();
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNavDrawer.classList.contains('open')) {
+      closeNav();
+    }
+  });
+}
 
 /* ==========================================================================
    1. THEME MANAGEMENT (LIGHT/DARK MODE)
